@@ -1,0 +1,24 @@
+{
+  "name": "lcc_templates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "child-process": "^1.0.2",
+    "glob": "^7.0.6",
+    "gulp": "^3.9.1",
+    "gulp-spsave": "^2.0.2",
+    "lcc_frontend_toolkit": "^0.4.0",
+    "lodash": "^4.15.0",
+    "mincer": "^1.4.2",
+    "mkpath": "^1.0.0",
+    "path-exists": "^3.0.0",
+    "rmdir": "^1.2.0"
+  }
+}
