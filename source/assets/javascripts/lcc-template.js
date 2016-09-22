@@ -1,2 +1,2 @@
+//= require modules
 //= require cookie-bar
-//= require core
