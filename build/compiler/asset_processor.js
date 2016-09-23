@@ -9,7 +9,6 @@ var path = require('path'),
     manifest = require('../../manifest.json'),
     util = require('util'),
     sass = require('node-sass'),
-    ejs = require('ejs'),
     Mincer = require('mincer');
 
 class AssetProcessor
@@ -18,18 +17,19 @@ class AssetProcessor
         this.repo_root = path.normalize(path.join(__filename, '../../..'));
         this.build_dir = path.join(this.repo_root, "app");
         this.stylesheetAssets = [];
-        this.static_assets = []
+        this.staticAssets = []
     }
 
     isWin() {
         return /^win/.test(process.platform);
     } 
 
-    compile() {  
+    copy() {  
         this.compileJavascripts();
         this.compileStylesheets();
-        this.copyStaticAssets();
         this.copyViews();
+        this.copyStaticAssets();
+        this.copyNeededToolkitAssets();
     }
 
     compileJavascripts() {
@@ -62,7 +62,7 @@ class AssetProcessor
         
         var env = new Mincer.Environment(this.repo_root);   
         env.appendPath("source/assets/stylesheets");
-        env.appendPath("node_modules/lcc_frontend_toolkit/app/assets/stylesheets"); 
+        env.appendPath("node_modules/lcc_frontend_toolkit/stylesheets"); 
 
         var stylesheetAssets = []; 
         env.registerPostProcessor('text/css', 'assetPathFinder', function (context, data) {
@@ -93,11 +93,66 @@ class AssetProcessor
         });
 
         self.stylesheetAssets = _.uniq(stylesheetAssets);
-        console.log(self.stylesheetAssets)
     }
 
-    copyStaticAssets() {
+    copyStaticAssets() {     
+        var self = this;   
+        var excludedExtensions = [".js", ".css", ".scss", ".ejs", ".html"];
 
+        var source = path.join(this.repo_root, "source", "assets");
+        var dest = path.join(this.build_dir, 'assets');
+
+        process.chdir(source);
+
+        var filesToCopy = [];
+
+        var files = glob.sync('**/*', { cwd: source });
+        _.forEach(files, function(file) {
+            if(fs.lstatSync(file).isDirectory(file) || (excludedExtensions.indexOf(path.extname(file)) > -1)) {
+                return;
+            }
+            filesToCopy.push(file); 
+        });
+
+        if(this.isWin()) {
+           spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"]
+                                            .concat(_.map(excludedExtensions, (item) => util.format("*%s", item))));
+        } else{
+            spawn('cp', ['-r --parents', filesToCopy.join(" "), dest]);           
+        }
+
+        // Strip leading path component to get logical path as referenced in stylesheets
+        this.staticAssets = _.map(filesToCopy, function(file) {
+             return file.replace(/[^\/]+\//, '');
+        });
+    }
+
+    copyNeededToolkitAssets() {
+        var self = this;
+
+        var neededAssets = _.difference(this.stylesheetAssets, this.staticAssets);
+
+        var env = new Mincer.Environment(this.repo_root);   
+        env.appendPath("node_modules/lcc_frontend_toolkit/images"); 
+
+        _.forEach(neededAssets, function(assetName) {
+            var asset = env.findAsset(assetName);
+
+            if(asset === undefined) {
+              throw Error(util.format("Asset %s cannot be found", assetName));
+            }
+
+            //Move the images into the stylesheets folder so they are relative to the stylesheets which call them
+            var targetFile = path.join(self.build_dir, 'assets', 'stylesheets', asset.logicalPath);
+
+            fs.open(targetFile, 'w', (err, fd) => {
+                if(err) throw err;
+
+                fs.writeFile(fd, asset, (err) => {
+                    if (err) throw err;
+                });
+            });     
+        });
     }
 
     copyViews() {
@@ -106,34 +161,33 @@ class AssetProcessor
         var source = path.join(this.repo_root, "source", "views");
         var dest = path.join(self.build_dir, 'views');
                 
-        process.chdir(source);
-
         var filesToCopy = [];
 
-        glob('**/*', null, function(err, files) {
-            _.forEach(files, function(file) {
-                if(fs.lstatSync(file).isDirectory(file)) {
-                    return;
-                }
-                filesToCopy.push(file);
-            });
-           
-            var copy = self.isWin() ? spawn('robocopy', [source, dest].concat(filesToCopy)) :
-                            spawn('cp', ['-r --parents', filesToCopy.join(" "), dest]);           
+        process.chdir(source);
+
+        var files = glob.sync('**/*', { cwd: source });
+        _.forEach(files, function(file) {
+            if(fs.lstatSync(file).isDirectory(file)) {
+                return;
+            }
+            filesToCopy.push(file);
         });
+           
+        var copy = self.isWin() ? spawn('robocopy', [source, dest].concat(filesToCopy)) :
+                        spawn('cp', ['-r --parents', filesToCopy.join(" "), dest]);      
     }
 
-   prepareBuildDir(){
-       var self = this;
+    compile(){
+        var self = this;
         pathExists(this.build_dir).then(exists => {
             if(exists) {
                 rmdir(self.build_dir, function (err, dirs, files) {
                    self.createBuildDir();
-                   self.compile();
+                   self.copy();
                 });
             } else {
                 self.createBuildDir();
-                self.compile();
+                self.copy();
             }
       });
     }
@@ -144,6 +198,3 @@ class AssetProcessor
         mkpath.sync(path.join(this.build_dir, "views"));
     }
 }
-
-var ap = new AssetProcessor();
-ap.prepareBuildDir();
