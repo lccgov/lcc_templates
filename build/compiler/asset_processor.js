@@ -24,7 +24,7 @@ class AssetProcessor
         return /^win/.test(process.platform);
     } 
 
-    copy() {  
+    compile() {  
         this.compileJavascripts();
         this.compileStylesheets();
         this.copyViews();
@@ -177,17 +177,17 @@ class AssetProcessor
                         spawn('cp', ['-r --parents', filesToCopy.join(" "), dest]);      
     }
 
-    compile(){
+    process(){
         var self = this;
         pathExists(this.build_dir).then(exists => {
             if(exists) {
                 rmdir(self.build_dir, function (err, dirs, files) {
                    self.createBuildDir();
-                   self.copy();
+                   self.compile();
                 });
             } else {
                 self.createBuildDir();
-                self.copy();
+                self.compile();
             }
       });
     }
