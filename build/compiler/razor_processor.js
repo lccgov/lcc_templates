@@ -9,11 +9,18 @@ class RazorProcessor extends TemplateProcessor
 
     handlePlaceholder(placeholder) {
         var hash = {
-            PageTitle: '@PageTitle',
-            SearchBox: '@RenderSection("search")',
-            TopNavigationNoFlyoutWithStartNode: '@RenderSection("navigation")',
-            ContentPlaceHolderMain: '@RenderBody',
-            FooterNavigationNoFlyoutWithStartNode: '@RenderSection("footer")'
+            before_html: '',
+            html_start_tag: '<html>',
+            head_end: '<title>@PageTitle</title>',
+            head_attribute: '',
+            body_attribute: '',
+            body_start: '',
+            search_box: '@RenderSection("search")',
+            main_nav: '@RenderSection("navigation")',
+            body_content: '@RenderBody',
+            footer_nav: '@RenderSection("footer-navigation")',
+            body_end: '',
+            html_end_tag: '</html>'
         }
 
         return hash[placeholder];

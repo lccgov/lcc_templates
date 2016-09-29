@@ -1,3 +1,5 @@
 node_modules/
-package/
+pkg/
 app/
+.vscode/
+lcc_template*/

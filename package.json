@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.0.1",
     "cheerio": "^0.22.0",
     "child-process": "^1.0.2",
     "ejs": "^2.5.2",
@@ -16,12 +17,13 @@
     "gulp": "^3.9.1",
     "gulp-spsave": "^2.0.2",
     "html-entities": "^1.2.0",
-    "lcc_frontend_toolkit": "^0.4.0",
+    "lcc_frontend_toolkit": "^0.11.0",
     "lodash": "^4.15.0",
     "mincer": "^1.4.2",
     "mkpath": "^1.0.0",
     "node-sass": "^3.10.0",
     "path-exists": "^3.0.0",
-    "rmdir": "^1.2.0"
+    "rmdir": "^1.2.0",
+    "root-require": "^0.3.1"
   }
 }

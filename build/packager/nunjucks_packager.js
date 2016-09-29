@@ -1,5 +1,5 @@
-var TarPackager = require('tar_packager');
+var TarPackager = require('./tar_packager');
 
-class NunjucksPackager extends TarPackager {
+module.exports = class NunjucksPackager extends TarPackager {
     
 }

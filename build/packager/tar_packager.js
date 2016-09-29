@@ -1,81 +1,90 @@
 var fs = require('fs'),
     path = require('path'),
+    SharePointProcessor = require('../compiler/sharepoint_processor'),
     NunjucksProcessor = require('../compiler/nunjucks_processor'),
     process = require('process'),
     glob = require('glob'),
     _ = require('lodash'),
     util = require('util'),
-    spawn = require('child_process').spawn;
+    spawn = require('child_process').spawn,
+    templateVersion = require('root-require')('package.json').version;
 
-class TarPackager {
+module.exports = class TarPackager {
     
     constructor(){
-        this.repo_root = path.normalize(path.join(__filename, '../../..'));
-        this.base_name = "lcc_template-1";
+        this.repoRoot = path.normalize(path.join(__filename, '../../..'));
+        this.baseName = util.format("lcc_template-%s", templateVersion);
     }
 
-    build() {
+    get compiledExtensions() {
+        return [".ejs", ".master", ".aspx"];
+    }
+
+    package() {
         var self = this;
-        fs.mkdtemp("lcc_template", (err, folder) => {
+        fs.mkdtemp(path.join(this.repoRoot, "lcc_template"), (err, folder) => {
             console.log(folder);
-            self.target_dir = path.join(folder, self.base_name);
-            fs.mkdir(self.target_dir, function() {
+            self.targetDir = path.join(folder, self.baseName);
+            fs.mkdir(self.targetDir, function() {
                 self.prepareContents()
-                self.createTarball()
+                //self.createTarball()
             });
         }); 
     }
 
-    prepareContents() {
+    prepareContents(callback) {
         var self = this;
-        console.log(path.join(this.repo_root, "app"));
-        process.chdir(path.join(this.repo_root, "app"));
-        glob('**/*', null, function(err, files) {
-           _.forEach(files, function(file) {
+        var files = glob.sync('**/*', {cwd: path.join(this.repoRoot, "app") });
+
+        this.copyStaticFiles(function() {        
+            process.chdir(path.join(self.repoRoot, "app"));
+            _.forEach(files, function(file) {
                 if(fs.lstatSync(file).isDirectory(file)) {
                     return;
                 }
-                if(path.extname(file) === ".master") {
-                    processTemplate(file)
-                } else {
-                    copyFile(file);
-                } 
-           });
 
-           fs.open(path.join(target_dir, "VERSION"), 'w', (err, fd) => {
-                fs.writeFile(fd, '1.0')
+                if(self.compiledExtensions.indexOf(path.extname(file)) > -1) {
+                    self.processTemplate(file)
+                } 
             });
         });
     }
 
-    copyFile(file){
-        var copy = spawn('cp', ['--parents', this.target_dir, self.base_name]);
+    copyStaticFiles(callback){
+        var self = this;
+        var copy = spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
+                                            .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item))));
         copy.on('exit', function (code) {
-            if (code > 0) {
-                throw Error("Error copying")
-            }
+            fs.open(path.join(self.targetDir, "VERSION"), 'w', (err, fd) => {
+                fs.writeFile(fd, templateVersion)
+                callback();
+            });
         });
     }
 
     processTemplate(file) {
-        var target_dir = path.join(this.target_dir, path.dirname(file))
-        fs.mkdir(target_dir, function() {
-            var target_file = path.basename(file, path.extname(file))
-            fs.open(path.join(target_dir, target_file), 'w+', (err, fd) => {
-                var processor = new NunjucksProcessor(file);
-                var result = processor.process();
-                fs.writeFile(fd, result)
+        var sourceFile = path.join(this.repoRoot, "app", file);
+        var targetDir = path.join(this.targetDir, path.dirname(file))
+
+        fs.mkdir(targetDir, function() {
+            fs.open(path.join(targetDir, path.basename(file)), 'w+', (err, fd) => {
+                var processor = new NunjucksProcessor(sourceFile);
+                processor.process(function(content) {
+                    fs.writeFile(fd, content)
+                });
             });
         });
     }
 
     createTarball() {
-        var self = this;
-         process.chdir(path.join(this.target_dir, ".."));
-         var target_path = path.join(this.repo_root, "pkg");
-         fs.mkdir(target_path, function() {
-            var target_file = path.join(self.repo_root, "").join(util.format("%s.tgz", self.base_name));
-            var tar = spawn('tar', ['czf', target_file, self.base_name]);
+         var self = this;
+         var chpath = path.normalize(path.join(this.targetDir, ".."));
+         console.log('Path: ' + chpath);
+         process.chdir(chpath);
+         var targetPath = path.join(this.repoRoot, "pkg");
+         fs.mkdir(targetPath, function() {
+            var targetFile = path.join(self.repoRoot, util.format("%s.tgz", self.baseName));
+            var tar = spawn('tar', ['czf', targetFile, self.baseName]);
             tar.on('exit', function (code) {
                 if (code > 0) {
                     throw Error("Error creating tar")
@@ -84,6 +93,3 @@ class TarPackager {
          });
     }
 }
-
-var t = new TarPackager();
-t.build();

@@ -7,16 +7,23 @@ class NunjucksProcessor extends TemplateProcessor
         super(file);
     }
 
-    handlePlaceholder(placeholder) {
+    get placeholders() {
         var hash = {
-            PageTitle: '{% block page_title %}{% endblock %}',
-            SearchBox: '{% include "includes/search_global.html" %}',
-            TopNavigationNoFlyoutWithStartNode: '{% include "includes/nav_global.html" %}',
-            ContentPlaceHolderMain: '{% block bodycontent %}{% endblock %}',
-            FooterNavigationNoFlyoutWithStartNode: '{% include "includes/footer_global.html" %}'
+            before_html: '',
+            html_start_tag: '<html>',
+            head_end: '<title>{% block page_title %}{% endblock %}</title>',
+            head_attribute: '',
+            body_attribute: '',
+            body_start: '',
+            search_box: '{% include "includes/search_global.html" %}',
+            main_nav: '{% include "includes/nav_global.html" %}',
+            body_content: '{% block bodycontent %}{% endblock %}',
+            footer_nav: '{% include "includes/footer_global.html" %}',
+            body_end: '',
+            html_end_tag: '</html>'
         }
 
-        return hash[placeholder];
+        return hash;
     }
 
     get templateEngine() {
