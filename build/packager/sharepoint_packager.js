@@ -1,15 +1,15 @@
 var TarPackager = require('./tar_packager'),
-    NunjucksProcessor = require('./../compiler/nunjucks_processor'),
+    SharePointProcessor = require('./../compiler/sharepoint_processor'),
     templateVersion = require('root-require')('package.json').version,
     path = require('path'),
     fs = require('fs'),
     util = require('util');
 
-module.exports = class NunjucksPackager extends TarPackager {
-    
+module.exports = class SharePointPackager extends TarPackager {
+
    constructor() {
       super();
-      this.baseName = util.format("nunjucks_lcc_template-%s", templateVersion);
+      this.baseName = util.format("sharepoint_lcc_template-%s", templateVersion);
    }
 
     processTemplate(file) {
@@ -18,11 +18,10 @@ module.exports = class NunjucksPackager extends TarPackager {
 
         fs.mkdir(targetDir, function() {
             fs.open(path.join(targetDir, path.basename(file)), 'w+', (err, fd) => {
-                new NunjucksProcessor(sourceFile).process(function(content) {
+                new SharePointProcessor(sourceFile).process(function(content) {
                     fs.writeFile(fd, content)
                 });
             });
         });
     }
-
 }

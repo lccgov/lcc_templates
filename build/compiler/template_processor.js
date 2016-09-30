@@ -1,5 +1,4 @@
 var fs = require('fs'),
-    cheerio = require('cheerio'),
     ejs = require('ejs'),
     util = require('util');
 
@@ -19,6 +18,10 @@ class TemplateProcessor {
     }
 
     get fileExtension() {
+        throw Error("Not implemented on base"); 
+    }
+
+    asset_path(file) {
         throw Error("Not implemented on base"); 
     }
 

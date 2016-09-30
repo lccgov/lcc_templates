@@ -63,17 +63,7 @@ module.exports = class TarPackager {
     }
 
     processTemplate(file) {
-        var sourceFile = path.join(this.repoRoot, "app", file);
-        var targetDir = path.join(this.targetDir, path.dirname(file))
-
-        fs.mkdir(targetDir, function() {
-            fs.open(path.join(targetDir, path.basename(file)), 'w+', (err, fd) => {
-                var processor = new NunjucksProcessor(sourceFile);
-                processor.process(function(content) {
-                    fs.writeFile(fd, content)
-                });
-            });
-        });
+        throw Error("Not available on base");
     }
 
     createTarball() {
