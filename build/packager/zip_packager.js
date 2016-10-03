@@ -27,18 +27,7 @@ module.exports = class ZipPackager {
     }
 
     package() {
-        var self = this;
-        fs.mkdtemp(path.join(this.repoRoot, "lcc_templates"), (err, folder) => {
-            console.log(folder);
-            self.targetDir = path.join(folder, self.baseName);
-            fs.mkdir(self.targetDir, function() {
-                async.series([function(cb) {
-                    self.prepareContents(cb)
-                }, function(cb) {
-                    self.createZip(cb)
-                }])
-            });
-        });
+        throw Error("Not implemented on base");
     }
 
     prepareContents(callback) {
@@ -92,6 +81,10 @@ module.exports = class ZipPackager {
     }
 
     processTemplate(file) {
+        throw Error("Not implemented on base");
+    }
+    
+    generatePackageJson(cb) {
         throw Error("Not implemented on base");
     }
 
