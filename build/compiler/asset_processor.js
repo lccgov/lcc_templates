@@ -31,6 +31,7 @@ module.exports = class AssetProcessor {
 
         var env = new Mincer.Environment(this.repoRoot);
         env.appendPath("source/assets/javascripts");
+        env.appendPath("node_modules/lcc_frontend_toolkit/javascripts");
 
         var javascriptTasks = [];
         _.forEach(manifest.javascripts, function(javascript) {
@@ -129,7 +130,6 @@ module.exports = class AssetProcessor {
         var copy = this.isWin() ? spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"]
                 .concat(_.map(excludedExtensions, (item) => util.format("*%s", item)))) :
             spawn('cp', ['-r --parents', filesToCopy.join(" "), dest]);
-
 
         copy.on('exit', function() {
             callback(null, []);

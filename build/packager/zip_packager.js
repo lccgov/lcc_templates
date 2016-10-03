@@ -7,13 +7,20 @@ var fs = require('fs'),
     _ = require('lodash'),
     util = require('util'),
     spawn = require('child_process').spawn,
-    templateVersion = require('root-require')('package.json').version;
+    templateVersion = require('root-require')('package.json').version,
+    async = require('async'),
+    archiver = require('archiver'),
+    rmdir = require('rmdir');
 
-module.exports = class TarPackager {
+module.exports = class ZipPackager {
     
     constructor(){
         this.repoRoot = path.normalize(path.join(__filename, '../../..'));
-        this.baseName = util.format("lcc_template-%s", templateVersion);
+        this.baseName = util.format("lcc_templates-%s", templateVersion);
+    }
+
+    isWin() {
+        return /^win/.test(process.platform);
     }
 
     get compiledExtensions() {
@@ -22,12 +29,11 @@ module.exports = class TarPackager {
 
     package() {
         var self = this;
-        fs.mkdtemp(path.join(this.repoRoot, "lcc_template"), (err, folder) => {
+        fs.mkdtemp(path.join(this.repoRoot, "lcc_templates"), (err, folder) => {
             console.log(folder);
             self.targetDir = path.join(folder, self.baseName);
             fs.mkdir(self.targetDir, function() {
-                self.prepareContents()
-                //self.createTarball()
+                async.series([function(cb) { self.prepareContents(cb)}, function(cb) { self.createZip(cb) }])
             });
         }); 
     }
@@ -36,18 +42,26 @@ module.exports = class TarPackager {
         var self = this;
         var files = glob.sync('**/*', {cwd: path.join(this.repoRoot, "app") });
 
-        this.copyStaticFiles(function() {        
+        var contentTasks = [];
+        contentTasks.push(function(cb) {  self.copyStaticFiles(cb) });
+        contentTasks.push(function(cb) {        
             process.chdir(path.join(self.repoRoot, "app"));
+
+            var templateTasks = [];
             _.forEach(files, function(file) {
                 if(fs.lstatSync(file).isDirectory(file)) {
                     return;
                 }
 
                 if(self.compiledExtensions.indexOf(path.extname(file)) > -1) {
-                    self.processTemplate(file)
+                    templateTasks.push(function(cb) { self.processTemplate(file, cb) });
                 } 
             });
+
+            async.parallel(templateTasks, function(err, results) { if(err) throw err; cb(null, []); })
         });
+
+        async.parallel(contentTasks, function(err, results) { if(err) throw err; callback(null, []); })
     }
 
     copyStaticFiles(callback){
@@ -57,29 +71,37 @@ module.exports = class TarPackager {
         copy.on('exit', function (code) {
             fs.open(path.join(self.targetDir, "VERSION"), 'w', (err, fd) => {
                 fs.writeFile(fd, templateVersion)
-                callback();
+                callback(null, []);
             });
         });
     }
 
     processTemplate(file) {
-        throw Error("Not available on base");
+        throw Error("Not implemented on base");
     }
 
-    createTarball() {
+    createZip(callback) {
          var self = this;
          var chpath = path.normalize(path.join(this.targetDir, ".."));
-         console.log('Path: ' + chpath);
-         process.chdir(chpath);
          var targetPath = path.join(this.repoRoot, "pkg");
+
          fs.mkdir(targetPath, function() {
-            var targetFile = path.join(self.repoRoot, util.format("%s.tgz", self.baseName));
-            var tar = spawn('tar', ['czf', targetFile, self.baseName]);
-            tar.on('exit', function (code) {
-                if (code > 0) {
-                    throw Error("Error creating tar")
-                }
-            });
+            var targetFile = path.join(targetPath, util.format("%s.%s", self.baseName, self.isWin() ? "zip" : "tar")), 
+                archive = self.isWin() ? archiver('zip') : archiver('tar'),
+                output = fs.createWriteStream(targetFile);
+                output.on('close', function() { 
+                    callback(null, [])     
+                });
+    
+                archive.pipe(output);
+                archive.bulk([
+                    { expand: true, cwd: path.join(chpath, self.baseName), src: ['**'] }
+                ]);   
+
+                archive.finalize(function(err, written) {
+                    callback(null, [])   
+                    if (err) throw err;        
+                });
          });
     }
 }

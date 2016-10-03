@@ -12,7 +12,7 @@ task ('compile', function() {
   new AssetProcessor().process(function() { jake.Task['build'].invoke(); });
 }) 
 
-desc("Build both nunjucks and SharePoint version")
+desc("Build both nunjucks and SharePoint versions")
 task('build', ["build:nunjucks", "build:sharepoint"])
 
 namespace("build", function() {
