@@ -15,31 +15,20 @@ module.exports = class NunjucksPackager extends ZipPackager {
       this.targetDir = path.join(this.repoRoot, "pkg", this.baseName);
    }
 
-   package() {
-        var self = this;
-        fs.mkdir(this.targetDir, (err, folder) => {
-            async.series([function(cb) {
-                self.prepareContents(cb) }, 
-            function(cb) { 
-                self.generatePackageJson(cb) },
-            function(cb) {
-                self.createZip(cb)
-            }])        
-        });
-    }
-
     processTemplate(file, cb) {
         var self = this;
         var sourceFile = path.join(this.repoRoot, "app", file);
+        var fileWithExtension = util.format('%s.%s', path.basename(file).substring(0, path.basename(file).indexOf('.')), 'html');
         fs.mkdir(path.join(self.targetDir, path.dirname(file)), (err, folder) => {
-            fs.open(path.join(self.targetDir, file), 'w+', (err, fd) => {
-                    if(err) throw err;
-                    new NunjucksProcessor(sourceFile).process(function(content) {
-                        fs.writeFile(fd, content, function() {
-                            cb(null, []);
-                        })
+            if(err) throw err;
+            fs.open(path.join(self.targetDir, path.dirname(file), fileWithExtension), 'w+', (err, fd) => {
+                if(err) throw err;
+                new NunjucksProcessor(sourceFile).process(function(content) {
+                    fs.writeFile(fd, content, function() {
+                        cb(null, []);
                     });
                 });
+            });
         });
     }
 

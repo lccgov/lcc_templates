@@ -27,7 +27,16 @@ module.exports = class ZipPackager {
     }
 
     package() {
-        throw Error("Not implemented on base");
+        var self = this;
+        fs.mkdir(this.targetDir, (err, folder) => {
+            async.series([function(cb) {
+                self.prepareContents(cb) }, 
+            function(cb) { 
+                self.generatePackageJson(cb) },
+            function(cb) {
+                self.createZip(cb)
+            }])        
+        });
     }
 
     prepareContents(callback) {
@@ -93,25 +102,23 @@ module.exports = class ZipPackager {
         var source = path.normalize(path.join(this.targetDir, ".."));
         var targetPath = path.join(this.repoRoot, "pkg");
 
-        fs.mkdir(targetPath, function() {
-            var targetFile = path.join(targetPath, util.format("%s.%s", self.baseName, self.isWin() ? "zip" : "tar")),
-                archive = self.isWin() ? archiver('zip') : archiver('tar'),
-                output = fs.createWriteStream(targetFile);
+        var targetFile = path.join(targetPath, util.format("%s.%s", self.baseName, self.isWin() ? "zip" : "tar")),
+            archive = self.isWin() ? archiver('zip') : archiver('tar'),
+            output = fs.createWriteStream(targetFile);
 
-            output.on('close', function() {
-                callback(null, [])
-            });
-            archive.pipe(output);
-            archive.bulk([{
-                expand: true,
-                cwd: path.join(source, self.baseName),
-                src: ['**']
-            }]);
+        output.on('close', function() {
+            callback(null, [])
+        });
+        archive.pipe(output);
+        archive.bulk([{
+            expand: true,
+            cwd: path.join(source, self.baseName),
+            src: ['**']
+        }]);
 
-            archive.finalize(function(err, written) {
-                callback(null, [])
-                if (err) throw err;
-            });
+        archive.finalize(function(err, written) {
+            callback(null, [])
+            if (err) throw err;
         });
     }
 }
