@@ -23,7 +23,7 @@ module.exports = class ZipPackager {
     }
 
     get compiledExtensions() {
-        return [".ejs", ".master", ".aspx"];
+        return [".ejs"];
     }
 
     package() {
@@ -35,7 +35,9 @@ module.exports = class ZipPackager {
                 self.generatePackageJson(cb) },
             function(cb) {
                 self.createZip(cb)
-            }])        
+            }], function(err, results) {
+                if(err) throw err;
+            });    
         });
     }
 
@@ -54,26 +56,26 @@ module.exports = class ZipPackager {
 
             var templateTasks = [];
             _.forEach(files, function(file) {
-                if (fs.lstatSync(file).isDirectory(file)) {
+              if (fs.lstatSync(file).isDirectory(file)) {
                     return;
-                }
-
-                if (self.compiledExtensions.indexOf(path.extname(file)) > -1) {
-                    templateTasks.push(function(cb) {
-                        self.processTemplate(file, cb)
-                    });
-                }
+              }
+              
+              if (self.compiledExtensions.indexOf(path.extname(file)) > -1) {
+                templateTasks.push(function(cb1) {
+                    self.processTemplate(file, cb1)
+                });
+              }
             });
 
             async.parallel(templateTasks, function(err, results) {
-                if (err) throw err;
-                cb(null, []);
+                if (err) return cb(err);
+                return cb(null, []);
             })
         });
 
-        async.parallel(contentTasks, function(err, results) {
-            if (err) throw err;
-            callback(null, []);
+        async.series(contentTasks, function(err, results) {
+            if (err) return callback(err);
+            return callback(null, []);
         })
     }
 
@@ -82,9 +84,11 @@ module.exports = class ZipPackager {
         var copy = spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
             .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item))));
         copy.on('exit', function(code) {
-            fs.open(path.join(self.targetDir, "VERSION"), 'w', (err, fd) => {
-                fs.writeFile(fd, templateVersion)
-                callback(null, []);
+            fs.open(path.join(self.targetDir, "VERSION.txt"), 'w', (err, fd) => {
+                fs.write(fd, templateVersion, function(err, written, string) {
+                    if(err) callback(err);
+                    callback(null, []);
+                })
             });
         });
     }
@@ -117,8 +121,8 @@ module.exports = class ZipPackager {
         }]);
 
         archive.finalize(function(err, written) {
-            callback(null, [])
-            if (err) throw err;
+            if (err) return callback(err)
+            return callback(null, [])
         });
     }
 }

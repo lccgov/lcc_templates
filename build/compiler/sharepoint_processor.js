@@ -126,10 +126,6 @@ class SharePointProcessor extends TemplateProcessor
        return "sharepoint";
     }
 
-    get fileExtension() {
-        return this.fileName.indexOf('.aspx') > 0 ? ".aspx" : ".master";
-    }
-
     asset_path(file) {
         var query_string = templateVersion;
         switch(path.extname(file)) {

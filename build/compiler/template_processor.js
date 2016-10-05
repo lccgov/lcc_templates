@@ -17,7 +17,7 @@ class TemplateProcessor {
         throw Error("Not implemented on base"); 
     }
 
-    get fileExtension() {
+    get generateFileExtension() {
         throw Error("Not implemented on base"); 
     }
 
@@ -28,8 +28,8 @@ class TemplateProcessor {
     process(cb) {
         console.log('Generating ' + this.templateEngine + ' template from ' + this.fileName);
         ejs.renderFile(this.fileName, this.placeholders, null, function(err, str) {
-            if(err) throw err;
-            cb(str);
+            if(err) return cb(err, null);
+            cb(null, str);
         });     
     }
 }

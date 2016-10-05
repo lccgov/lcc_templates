@@ -26,7 +26,6 @@ module.exports = class AssetProcessor {
 
     compileJavascripts(callback) {
         console.log('Compiling Javascripts');
-
         var self = this;
 
         var env = new Mincer.Environment(this.repoRoot);
@@ -145,43 +144,44 @@ module.exports = class AssetProcessor {
         console.log('Copying Needed Toolkit Assets');
 
         var self = this;
-
         var neededAssets = _.difference(this.stylesheetAssets, this.staticAssets);
+        
         if (neededAssets.length === 0) {
-            return
-        }
+            return callback(null, [])
+        } else {
+            fs.mkdir(path.join(self.buildDir, 'assets', 'stylesheets', 'images'), (err, folder) => {
+                if(err) callback(err);
+                var env = new Mincer.Environment(this.repoRoot);
+                env.appendPath("node_modules/lcc_frontend_toolkit/img");
 
-        var env = new Mincer.Environment(this.repoRoot);
-        env.appendPath("node_modules/lcc_frontend_toolkit/img");
+                var assetTasks = [];
+                _.forEach(neededAssets, function(assetName) {
+                    var asset = env.findAsset(assetName);
 
-        var assetTasks = [];
-        _.forEach(neededAssets, function(assetName) {
-            var asset = env.findAsset(assetName);
+                    if (asset === undefined) {
+                        throw Error(util.format("Asset %s cannot be found", assetName));
+                    }
 
-            if (asset === undefined) {
-                throw Error(util.format("Asset %s cannot be found", assetName));
-            }
+                    // move the images into the stylesheets folder so they are relative to the stylesheets which call them
+                    var targetFile = path.join(self.buildDir, 'assets', 'stylesheets', 'images', asset.logicalPath);
 
-            // move the images into the stylesheets folder so they are relative to the stylesheets which call them
-            var targetFile = path.join(self.buildDir, 'assets', 'stylesheets', 'images', asset.logicalPath);
-
-            assetTasks.push(function(cb) {
-                fs.mkdir(path.join(self.buildDir, 'assets', 'stylesheets', 'images'), function() {
-                    fs.open(targetFile, 'w+', (err, fd) => {
-                        if (err) throw err;
-                        fs.writeFile(fd, asset, (err) => {
+                    assetTasks.push(function(cb) {      
+                        fs.open(targetFile, 'w+', (err, fd) => {
                             if (err) throw err;
-                            cb(null, []);
+                            fs.write(fd, asset, (err) => {
+                                if (err) cb(err);
+                                cb(null, []);
+                            });
                         });
                     });
-                })
-            });
-        });
+                });
 
-        async.parallel(assetTasks, function(err, results) {
-            if (err) throw err;
-            callback(null, []);
-        })
+                async.parallel(assetTasks, function(err, results) {
+                    if (err) throw err;
+                    callback(null, []);
+                });
+            });
+        } 
     }
 
     copyViews(callback) {
