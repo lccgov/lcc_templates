@@ -8,7 +8,7 @@ install:
 - npm install -g jake
 script:
 - npm whoami
-- jake
+- jake --jakefile ./jakefile.js
 env:
   global:
   - secure: 40GpiBstu+W9mm+fj9RIR7dCvFdn32VGxfvPAzruxesqF40+7Vqlrm3mMr/p7G4YfC8TD6NXtiHwAXKl4ZbQNdQbKcMk3UtPkXQBq3iapyCeGqRkppkjMFmy2BNN+bR6OVB4+utyX22+8d/Yq5tKdOPMjZa2Kun8VxlpWRCZ3LNBwhHSZo529av1YIrVcTbgNVoJGeAh8Ft7hbTAiPHQs2PVP1efJwz4meCKDN/mLHBvQw1gIgRcmzxyRAKsQJ95sFK3FEFp1GNQMCxBuSjHH8RCscKKQ+N3ubWowOh4o8wyCwJR4rMAsIQSv+gPPB+xxsPiquOyDG0T8G+0BAKn23jSca3Bd9MMMaF3MKNbCqeYXF524+gAsW000Xkh3bP2PzF2nncEhJS5ExbFA+GIBjqrw/OY9dNxG7exoie7hXEKlBd+xk6IspnziZOv5CSWBiCkCczTmfQgfaP4EEYOQSOhx5V9roRvbyc2+xJY+zDSwt+3WO5A5UC1MZ8rRWwQ0JlmQoq3usTuanv/Ulw23BTLT2ihZgrSm/X4bYOhfaXrSToQ7zXutoF9Dy7oQhpJd/pOioYpg7096xMZpvUfBRK7gabK4wFmhLA7cO7LlI9aR4iYRMA9VL58H19zWmH2EkQ8i8EVqluWMk+Mj7r+nd8ayz/4c3FAA55VrShmSkw=
