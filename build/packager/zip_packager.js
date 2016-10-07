@@ -26,7 +26,7 @@ module.exports = class ZipPackager {
         return [".ejs"];
     }
 
-    package() {
+    package(callback) {
         var self = this;
         fs.mkdir(this.targetDir, (err, folder) => {
             async.series([function(cb) {
@@ -37,6 +37,7 @@ module.exports = class ZipPackager {
                 self.createZip(cb)
             }], function(err, results) {
                 if(err) throw err;
+                callback();
             });    
         });
     }
