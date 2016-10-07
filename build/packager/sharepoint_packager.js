@@ -1,4 +1,4 @@
-var ZipPackager = require('./zip_packager'),
+var Packager = require('./packager'),
     SharePointProcessor = require('./../compiler/sharepoint_processor'),
     templateVersion = require('root-require')('package.json').version,
     path = require('path'),
@@ -7,7 +7,7 @@ var ZipPackager = require('./zip_packager'),
     ejs = require('ejs'),
     async = require('async');
 
-module.exports = class SharePointPackager extends ZipPackager {
+module.exports = class SharePointPackager extends Packager {
     
    constructor() {
       super();

@@ -1,4 +1,4 @@
-var ZipPackager = require('./zip_packager'),
+var Packager = require('./packager'),
     NunjucksProcessor = require('./../compiler/nunjucks_processor'),
     templateVersion = require('root-require')('package.json').version,
     path = require('path'),
@@ -7,7 +7,7 @@ var ZipPackager = require('./zip_packager'),
     ejs = require('ejs'),
     async = require('async');
 
-module.exports = class NunjucksPackager extends ZipPackager {
+module.exports = class NunjucksPackager extends Packager {
     
    constructor() {
       super();

@@ -19,12 +19,12 @@
         fs.mkdtemp(path.join(this.repoRoot, "lcc_templates_sharepoint"), (err, folder) => {
             git().clone(self.gitUrl, folder, function() {
                 process.chdir(folder);
-                cp('-r', util.format('%s\*', self.sourceDir), '.');
+                cp('-r', util.format('%s/*', self.sourceDir), folder);
                 exec('git config --global user.email "builds@travis-ci.org"');
                 exec('git config --global user.name "Travis CI"');
                 exec("git add -A .");
-                exec(util.format('git commit -q -m "Publishing LCC nunjucks templates version %s"', self.version));
-                exec(util.format("git tag v%s"), self.version);
+                exec(util.format('git commit -q -m "Publishing LCC sharepoint templates version %s"', self.version));
+                exec(util.format("git tag v%s", self.version));
                 exec("git push -q --tags origin master");
                 exec("npm publish ./");
             })

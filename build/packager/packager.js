@@ -8,10 +8,9 @@ var fs = require('fs'),
     util = require('util'),
     spawn = require('child_process').spawn,
     templateVersion = require('root-require')('package.json').version,
-    async = require('async'),
-    archiver = require('archiver');
-
-module.exports = class ZipPackager {
+    async = require('async');
+    
+module.exports = class Packager {
 
     constructor() {
         this.repoRoot = path.normalize(path.join(__filename, '../../..'));
@@ -32,10 +31,8 @@ module.exports = class ZipPackager {
             async.series([function(cb) {
                 self.prepareContents(cb) }, 
             function(cb) { 
-                self.generatePackageJson(cb) },
-            function(cb) {
-                self.createZip(cb)
-            }], function(err, results) {
+                self.generatePackageJson(cb) }], 
+            function(err, results) {
                 if(err) throw err;
                 callback();
             });    
@@ -86,13 +83,8 @@ module.exports = class ZipPackager {
             .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
                spawn('rsync', ['-av'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item)).concat([path.join(this.repoRoot, "app"), self.targetDir])));
 
-        copy.on('exit', function(code) {
-            fs.open(path.join(self.targetDir, "VERSION.txt"), 'w', (err, fd) => {
-                fs.write(fd, templateVersion, function(err, written, string) {
-                    if(err) callback(err);
-                    callback(null, []);
-                })
-            });
+        copy.on('exit', function(code) {    
+            callback(null, []);
         });
     }
 
@@ -102,30 +94,5 @@ module.exports = class ZipPackager {
     
     generatePackageJson(cb) {
         throw Error("Not implemented on base");
-    }
-
-    createZip(callback) {
-        var self = this;
-        var source = path.normalize(path.join(this.targetDir, ".."));
-        var targetPath = path.join(this.repoRoot, "pkg");
-
-        var targetFile = path.join(targetPath, util.format("%s.%s", self.baseName, self.isWin() ? "zip" : "tar")),
-            archive = self.isWin() ? archiver('zip') : archiver('tar'),
-            output = fs.createWriteStream(targetFile);
-
-        output.on('close', function() {
-            callback(null, [])
-        });
-        archive.pipe(output);
-        archive.bulk([{
-            expand: true,
-            cwd: path.join(source, self.baseName),
-            src: ['**']
-        }]);
-
-        archive.finalize(function(err, written) {
-            if (err) return callback(err)
-            return callback(null, [])
-        });
     }
 }
