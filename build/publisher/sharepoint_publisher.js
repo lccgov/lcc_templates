@@ -7,7 +7,7 @@
   module.exports = class SharePointPublisher {
 
     constructor(version) {
-        this.gitUrl = "https://${GITHUBKEY}@github.com/lccgov/lcc_templates_sharepoint.git";
+        this.gitUrl = util.format("https://%s@github.com/lccgov/lcc_templates_sharepoint.git", process.env.GITHUBKEY);
         this.version = version;
         this.repoRoot = path.normalize(path.join(__filename, '../../..'));
         this.sourceDir = path.join(this.repoRoot, 'pkg', util.format("sharepoint_lcc_templates-%s", this.version));
