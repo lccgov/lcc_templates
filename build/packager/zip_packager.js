@@ -82,7 +82,7 @@ module.exports = class ZipPackager {
 
     copyStaticFiles(callback) {
         var self = this;
-        var copy = isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
+        var copy = this.isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
             .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
                spawn('rsync', ['-av'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item)).concat([path.join(this.repoRoot, "app"), self.targetDir])));
 
