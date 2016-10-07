@@ -7,7 +7,7 @@
   module.exports = class SharePointPublisher {
 
     constructor(version) {
-        this.gitUrl = "https://$GITHUBKEY@github.com/lccgov/lcc_templates_sharepoint.git";
+        this.gitUrl = "https://${GITHUBKEY}@github.com/lccgov/lcc_templates_sharepoint.git";
         this.version = version;
         this.repoRoot = path.normalize(path.join(__filename, '../../..'));
         this.sourceDir = path.join(this.repoRoot, 'pkg', util.format("sharepoint_lcc_templates-%s", this.version));
@@ -20,10 +20,12 @@
             git().clone(self.gitUrl, folder, function() {
                 process.chdir(folder);
                 cp('-r', util.format('%s\*', self.sourceDir), '.');
+                exec('git config --global user.email "builds@travis-ci.org"');
+                exec('git config --global user.name "Travis CI"');
                 exec("git add -A .");
-                exec(util.format('git commit -q -m "Publishing LCC sharepoint templates version %s"', self.version));
+                exec(util.format('git commit -q -m "Publishing LCC nunjucks templates version %s"', self.version));
                 exec(util.format("git tag v%s"), self.version);
-                exec("git push --tags origin master");
+                exec("git push -q --tags origin master");
                 exec("npm publish ./");
             })
         });
