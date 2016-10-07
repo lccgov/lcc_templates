@@ -82,8 +82,10 @@ module.exports = class ZipPackager {
 
     copyStaticFiles(callback) {
         var self = this;
-        var copy = spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
-            .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item))));
+        var copy = isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
+            .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
+               spawn('rsync', ['-av'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item)).concat([path.join(this.repoRoot, "app"), self.targetDir])));
+
         copy.on('exit', function(code) {
             fs.open(path.join(self.targetDir, "VERSION.txt"), 'w', (err, fd) => {
                 fs.write(fd, templateVersion, function(err, written, string) {
