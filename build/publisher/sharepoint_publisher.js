@@ -26,7 +26,10 @@
                 exec(util.format('git commit -q -m "Publishing LCC sharepoint templates version %s"', self.version));
                 exec(util.format("git tag v%s", self.version));
                 exec("git push -q --tags origin master");
-                exec("npm adduser")
+                exec(util.format("echo '//registry.npmjs.org/:_authToken=\%s' > .npmrc", process.env.NPMAUTH));
+                exec(util.format("echo '//registry.npmjs.org/:_password=\%s' >> .npmrc", process.env.NPMTOKEN));
+                exec("echo '//registry.npmjs.org/:username=lccgov' >> .npmrc");
+                exec("echo '//registry.npmjs.org/:email=developer@leeds.gov.uk' >> .npmrc");
                 exec("npm publish ./");
             })
         });
