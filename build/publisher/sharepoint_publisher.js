@@ -2,12 +2,13 @@
       path = require('path'),
       shell = require('shelljs/global'),
       util = require('util'),
-      git = require('simple-git')(path.normalize(path.join(__filename, '../../..')));
+      git = require('simple-git');
 
   module.exports = class SharePointPublisher {
 
     constructor(version) {
         this.gitUrl = util.format("https://%s@github.com/lccgov/lcc_templates_sharepoint.git", process.env.GITHUBKEY);
+        this.gitUrl = "https://github.com/lccgov/lcc_templates_sharepoint.git";
         this.version = version;
         this.repoRoot = path.normalize(path.join(__filename, '../../..'));
         this.sourceDir = path.join(this.repoRoot, 'pkg', util.format("sharepoint_lcc_templates-%s", this.version));
@@ -26,25 +27,22 @@
                 exec(util.format('git commit -q -m "Publishing LCC sharepoint templates version %s"', self.version));
                 exec(util.format("git tag v%s", self.version));
                 exec("git push -q --tags origin master");
-                //exec(util.format("echo '//registry.npmjs.org/:_authToken=\%s' > .npmrc", process.env.NPMAUTH));
-                //exec(util.format("echo '//registry.npmjs.org/:_password=\%s' >> .npmrc", process.env.NPMTOKEN));
-                //exec("echo '//registry.npmjs.org/:username=lccgov' >> .npmrc");
-                //exec("echo '//registry.npmjs.org/:email=developer@leeds.gov.uk' >> .npmrc");
-               // exec("npm publish ./");
+                exec(util.format("echo '//registry.npmjs.org/:_authToken=\%s' > .npmrc", process.env.NPMAUTH));
+                exec(util.format("echo '//registry.npmjs.org/:_password=\%s' >> .npmrc", process.env.NPMTOKEN));
+                exec("echo '//registry.npmjs.org/:username=lccgov' >> .npmrc");
+                exec("echo '//registry.npmjs.org/:email=developer@leeds.gov.uk' >> .npmrc");
+                exec("npm publish ./");
             })
         });
     }
 
     hasVersionUpdated(cb) {
-        var version = util.format(/v%s/, this.version);
-        git().listRemote(['--tags'], function(err, data) {
-            console.log(data);
+        var version = util.format("v%s", this.version);
+        var regex = new RegExp(version);
+        git().listRemote(['--tags', util.format(this.gitUrl)], function(err, data) {
            if(err) return cb(err);
-           var latestTag = data.slice(-1)[0];
-           console.log(latestTag);
-           if(latestTag ===  undefined) return cb(null, true);
-           console.log(regex.test(latestTag))
-           return cb(null, regex.test(latestTag));
+           if(data  ===  undefined) return cb(null, true);
+           return cb(null, !regex.test(data));
         });
     }
 }
