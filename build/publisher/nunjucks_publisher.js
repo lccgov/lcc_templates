@@ -2,7 +2,7 @@
       path = require('path'),
       shell = require('shelljs/global'),
       util = require('util'),
-      git = require('simple-git');
+      git = require('simple-git')(path.normalize(path.join(__filename, '../../..')));
 
   module.exports = class NunjucksPublisher {
 
@@ -20,17 +20,17 @@
             git().clone(self.gitUrl, folder, function() {
                 process.chdir(folder);
                 cp('-r', util.format('%s/*', self.sourceDir), folder);
-                exec('git config --global user.email "builds@travis-ci.org"');
+                exec('git config --global user.email "developer@leeds.gov.uk"');
                 exec('git config --global user.name "Travis CI"');
                 exec("git add -A .");
                 exec(util.format('git commit -q -m "Publishing LCC nunjucks templates version %s"', self.version));
                 exec(util.format("git tag v%s", self.version));
                 exec("git push -q --tags origin master");
-                exec(util.format("echo '//registry.npmjs.org/:_authToken=\%s' > .npmrc", process.env.NPMAUTH));
-                exec(util.format("echo '//registry.npmjs.org/:_password=\%s' >> .npmrc", process.env.NPMTOKEN));
-                exec("echo '//registry.npmjs.org/:username=lccgov' >> .npmrc");
-                exec("echo '//registry.npmjs.org/:email=developer@leeds.gov.uk' >> .npmrc");
-                exec("npm publish ./");
+                //exec(util.format("echo '//registry.npmjs.org/:_authToken=\%s' > .npmrc", process.env.NPMAUTH));
+                //exec(util.format("echo '//registry.npmjs.org/:_password=\%s' >> .npmrc", process.env.NPMTOKEN));
+                //exec("echo '//registry.npmjs.org/:username=lccgov' >> .npmrc");
+               // exec("echo '//registry.npmjs.org/:email=developer@leeds.gov.uk' >> .npmrc");
+                //exec("npm publish ./");
             })
         });
     }
@@ -42,7 +42,7 @@
            if(err) return cb(err);
            var latestTag = data.slice(-1)[0];
            console.log(latestTag);
-           if(!latestTag) return cb(null, true);
+           if(latestTag  ===  undefined) return cb(null, true);
            console.log(regex.test(latestTag))
            return cb(null, regex.test(latestTag));
         });

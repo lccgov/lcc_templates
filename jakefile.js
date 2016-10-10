@@ -65,6 +65,7 @@ namespace("publish", function() {
       console.log("Publishing sharepoint templates if version updated")
        var publisher = new SharePointPublisher(templateVersion);
        publisher.hasVersionUpdated(function(err, updated) {
+          if(err) throw err;
           if(updated) {
               publisher.publish();
           } else {
