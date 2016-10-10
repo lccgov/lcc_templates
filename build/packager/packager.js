@@ -9,7 +9,8 @@ var fs = require('fs'),
     spawn = require('child_process').spawn,
     templateVersion = require('root-require')('package.json').version,
     async = require('async'),
-    shell = require('shelljs/global');
+    shell = require('shelljs/global'),
+    rsync = require('rsync');
 
 module.exports = class Packager {
 
@@ -83,13 +84,20 @@ module.exports = class Packager {
         process.chdir(path.join(this.repoRoot, "app"));
         exec("ls -lR")
 
-        var copy = this.isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
-            .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
-              spawn('rsync', ['-avz'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item)), path.join(this.repoRoot, "app/"), self.targetDir));
-       
-        copy.on('exit', function(code) {    
-            callback(null, []);
-        });
+        if(this.isWin()) {
+            var robocopy = spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"].concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item))));
+            robocopy.on('exit', function(code) {    
+                callback(null, []);
+            });
+        }else {
+            var rsync = new Rsync().flags('avz').source(path.join(this.repoRoot, "app/")).destination(self.targetDir);
+            rsync.cwd(path.join(this.repoRoot, "app"));
+            rsync.exclude(_.map(self.compiledExtensions, (item) => util.format("*%s", item)));
+            rsync.execute(function(error, code, cmd) {
+               if(error) throw error;
+               callback(null, []);
+            });
+        }
     }
 
     processTemplate(file) {

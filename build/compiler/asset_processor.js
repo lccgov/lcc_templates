@@ -10,7 +10,8 @@ var path = require('path'),
     util = require('util'),
     sass = require('node-sass'),
     Mincer = require('mincer'),
-    async = require('async');
+    async = require('async'),
+    rsync = require('rsync');
 
 module.exports = class AssetProcessor {
     constructor() {
@@ -125,13 +126,20 @@ module.exports = class AssetProcessor {
             filesToCopy.push(file);
         });
 
-        var copy = this.isWin() ? spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"]
-                .concat(_.map(excludedExtensions, (item) => util.format("*%s", item)))) :           
-                spawn('rsync', ['-avz', '--exclude javascripts/', '--exclude stylesheets/'].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item)), path.join(source, "/*"), dest));
-
-        copy.on('exit', function() {
-            callback(null, []);
-        });
+        if(this.isWin()) {
+            var robocopy = spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"].concat(_.map(excludedExtensions, (item) => util.format("*%s", item))));
+            robocopy.on('exit', function() {
+                callback(null, []);
+            });
+        } else {
+            var rsync = new Rsync().flags('avz').source(source).destination(dest);
+            rsync.cwd(source);
+            rsync.exclude(['javascripts/', 'stylesheets/'].concat(_.map(self.excludedExtensions, (item) => util.format("*%s", item))));
+            rsync.execute(function(error, code, cmd) {
+               if(error) throw error;
+               callback(null, []);
+            });
+        }
 
         // strip leading path component to get logical path as referenced in stylesheets
         this.staticAssets = _.map(filesToCopy, function(file) {
