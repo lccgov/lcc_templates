@@ -67,7 +67,7 @@ namespace("publish", function() {
        publisher.hasVersionUpdated(function(err, updated) {
           if(err) throw err;
           if(updated) {
-             // publisher.publish();
+              publisher.publish();
           } else {
               console.log("sharepoint templates version has not been updated so skipping")
          }
@@ -81,7 +81,7 @@ namespace("publish", function() {
        publisher.hasVersionUpdated(function(err, updated) {
           if(err) throw err;
           if(updated) {
-             // publisher.publish();
+              publisher.publish();
           } else {
               console.log("nunjucks templates version has not been updated so skipping")
           }
