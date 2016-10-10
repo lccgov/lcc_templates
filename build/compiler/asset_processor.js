@@ -132,7 +132,7 @@ module.exports = class AssetProcessor {
                 callback(null, []);
             });
         } else {
-            var rsync = new Rsync().flags('avz').source(source).destination(dest);
+            var rsync = new Rsync().flags('avz').source(source + "/").destination(dest);
             rsync.cwd(source);
             rsync.exclude(['javascripts/', 'stylesheets/'].concat(_.map(self.excludedExtensions, (item) => util.format("*%s", item))));
             rsync.execute(function(error, code, cmd) {
