@@ -19,6 +19,7 @@
         fs.mkdtemp(path.join(this.repoRoot, "lcc_templates_nunjucks"), (err, folder) => {
             git().clone(self.gitUrl, folder, function() {
                 process.chdir(folder);
+                exec("ls -1 | grep -v 'readme.md' | xargs -I {} rm -rf {}");
                 cp('-r', util.format('%s/*', self.sourceDir), folder);
                 exec('git config --global user.email "developer@leeds.gov.uk"');
                 exec('git config --global user.name "Travis CI"');

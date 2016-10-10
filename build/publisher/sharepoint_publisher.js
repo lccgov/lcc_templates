@@ -8,7 +8,6 @@
 
     constructor(version) {
         this.gitUrl = util.format("https://%s@github.com/lccgov/lcc_templates_sharepoint.git", process.env.GITHUBKEY);
-        this.gitUrl = "https://github.com/lccgov/lcc_templates_sharepoint.git";
         this.version = version;
         this.repoRoot = path.normalize(path.join(__filename, '../../..'));
         this.sourceDir = path.join(this.repoRoot, 'pkg', util.format("sharepoint_lcc_templates-%s", this.version));
@@ -20,6 +19,7 @@
         fs.mkdtemp(path.join(this.repoRoot, "lcc_templates_sharepoint"), (err, folder) => {
             git().clone(self.gitUrl, folder, function() {
                 process.chdir(folder);
+                exec("ls -1 | grep -v 'readme.md' | xargs -I {} rm -rf {}");
                 cp('-r', util.format('%s/*', self.sourceDir), folder);
                 exec('git config --global user.email "developer@leeds.gov.uk"');
                 exec('git config --global user.name "Travis CI"');
