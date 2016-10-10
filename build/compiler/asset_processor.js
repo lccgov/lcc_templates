@@ -128,7 +128,7 @@ module.exports = class AssetProcessor {
 
         var copy = this.isWin() ? spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"]
                 .concat(_.map(excludedExtensions, (item) => util.format("*%s", item)))) :
-            spawn('rsync', ['-av'].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item)).concat([source, dest])));
+                spawn('rsync', ['-avz'].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item)).concat([source, dest])));
 
         copy.on('exit', function() {
             callback(null, []);
@@ -206,8 +206,8 @@ module.exports = class AssetProcessor {
             filesToCopy.push(file);
         });
 
-        var copy = self.isWin() ? spawn('robocopy', [source, dest].concat(filesToCopy)) :
-            spawn('cp', ['-r --parents', filesToCopy.join(" "), dest]);
+        var copy = self.isWin() ? spawn('robocopy', [source, dest].concat(filesToCopy)) : 
+            spawn('rsync', filesToCopy.join(" ").concat([source, dest]));
 
         copy.on('exit', function() {
             callback(null, []);
