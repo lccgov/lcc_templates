@@ -31,7 +31,7 @@
                 exec(util.format("echo '//registry.npmjs.org/:_password=\%s' >> .npmrc", process.env.NPMTOKEN));
                 exec("echo '//registry.npmjs.org/:username=lccgov' >> .npmrc");
                 exec("echo '//registry.npmjs.org/:email=developer@leeds.gov.uk' >> .npmrc");
-                //exec("npm publish ./");
+                exec("npm publish ./");
             })
         });
     }
