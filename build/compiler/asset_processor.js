@@ -127,8 +127,8 @@ module.exports = class AssetProcessor {
         });
 
         var copy = this.isWin() ? spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"]
-                .concat(_.map(excludedExtensions, (item) => util.format("*%s", item)))) :
-                spawn('rsync', ['-avz'].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item)).concat([source, dest])));
+                .concat(_.map(excludedExtensions, (item) => util.format("*%s", item)))) :           
+                spawn('rsync', ['-vaz', source, dest].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item))));
 
         copy.on('exit', function() {
             callback(null, []);
