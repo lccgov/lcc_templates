@@ -34,7 +34,7 @@
 
     hasVersionUpdated(cb) {
         var version = util.format("/v%s/", this.version);
-        var regex = new Regex(version);
+        var regex = new RegExp(version);
         git().listRemote(['--tags'], this.gitUrl, function(err, data) {
            console.log(data);
            if(err) return cb(err);
