@@ -26,6 +26,7 @@
                 exec(util.format('git commit -q -m "Publishing LCC nunjucks templates version %s"', self.version));
                 exec(util.format("git tag v%s", self.version));
                 exec("git push -q --tags origin master");
+                exec("npm whoami");
                 exec("npm publish ./");
             })
         });
