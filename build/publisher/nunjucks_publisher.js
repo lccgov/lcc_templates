@@ -33,12 +33,14 @@
     }
 
     hasVersionUpdated(cb) {
-        var version = util.format(/v%s/, this.version);
+        var version = util.format("/v%s/", this.version);
+        var regex = new Regex(version);
         git().listRemote(['--tags'], this.gitUrl, function(err, data) {
+           console.log(data);
            if(err) return cb(err);
            if(!data) return cb(null, true);
-           console.log(data.test(version))
-           return cb(null, data.match(version));
+           console.log(regex.test(version))
+           return cb(null, regex.match(version));
         });
     }
 }
