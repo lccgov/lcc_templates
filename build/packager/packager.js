@@ -89,10 +89,10 @@ module.exports = class Packager {
             robocopy.on('exit', function(code) {    
                 callback(null, []);
             });
-        }else {
-            var rsync = new Rsync().flags('avz').source(path.join(this.repoRoot, "app/")).destination(self.targetDir);
+        } else {
+            var rsync = new Rsync().flags('avz').source(path.join(this.repoRoot, "app", "/")).destination(self.targetDir);
             rsync.cwd(path.join(this.repoRoot, "app"));
-            rsync.exclude(_.map(self.compiledExtensions, (item) => util.format("*%s", item)));
+            //rsync.exclude(_.map(self.compiledExtensions, (item) => util.format("*%s", item)));
             rsync.execute(function(error, code, cmd) {
                if(error) throw error;
                callback(null, []);
