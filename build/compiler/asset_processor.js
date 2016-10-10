@@ -207,7 +207,7 @@ module.exports = class AssetProcessor {
         });
 
         var copy = self.isWin() ? spawn('robocopy', [source, dest].concat(filesToCopy)) : 
-            spawn('rsync', filesToCopy.join(" ").concat([source, dest]));
+            spawn('rsync', filesToCopy.concat(source, dest));
 
         copy.on('exit', function() {
             callback(null, []);
