@@ -8,8 +8,9 @@ var fs = require('fs'),
     util = require('util'),
     spawn = require('child_process').spawn,
     templateVersion = require('root-require')('package.json').version,
-    async = require('async');
-    
+    async = require('async'),
+    shell = require('shelljs/global');
+
 module.exports = class Packager {
 
     constructor() {
@@ -79,6 +80,11 @@ module.exports = class Packager {
 
     copyStaticFiles(callback) {
         var self = this;
+        process.chdir(path.join(this.repoRoot, "app"));
+        ls().forEach(function(file) {
+            console.log("File: " + file);
+        });
+
         var copy = this.isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
             .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
               spawn('rsync', ['-rtv'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item))).concat(path.join(this.repoRoot, "app"), self.targetDir));
