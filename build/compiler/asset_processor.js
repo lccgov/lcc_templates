@@ -45,7 +45,7 @@ module.exports = class AssetProcessor {
             javascriptTasks.push(function(cb) {
                 fs.open(targetFile, 'w', (err, fd) => {
                     if (err) throw err;
-
+                    console.log(asset.toString())
                     fs.writeFile(fd, asset.toString(), (err) => {
                         if (err) throw err;
                         callback(null, []);
@@ -88,6 +88,7 @@ module.exports = class AssetProcessor {
             stylesheetTasks.push(function(cb) {
                 fs.open(targetFile, 'w', (err, fd) => {
                     if (err) throw err;
+                    console.log(asset);
                     fs.writeFile(fd, asset, (err) => {
                         if (err) throw err;
                         cb(null, []);
@@ -128,7 +129,7 @@ module.exports = class AssetProcessor {
 
         var copy = this.isWin() ? spawn('robocopy', [source, dest, "/MIR", "/XD", "javascripts", "stylesheets", "/XF"]
                 .concat(_.map(excludedExtensions, (item) => util.format("*%s", item)))) :           
-                spawn('rsync', ['-rtv', '--exclude javascripts', '--exclude stylesheets'].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item))).concat(source, dest));
+                spawn('rsync', ['-rtv', '--exclude javascripts/', '--exclude stylesheets/'].concat(_.map(self.excludedExtensions, (item) => util.format("--exclude *%s", item))).concat(source, dest));
 
         copy.on('exit', function() {
             callback(null, []);

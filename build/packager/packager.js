@@ -81,7 +81,7 @@ module.exports = class Packager {
     copyStaticFiles(callback) {
         var self = this;
         process.chdir(path.join(this.repoRoot, "app"));
-        exec("ls -d **/*")
+        exec("ls -lR")
 
         var copy = this.isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
             .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
