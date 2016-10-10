@@ -26,6 +26,7 @@
                 exec(util.format('git commit -q -m "Publishing LCC sharepoint templates version %s"', self.version));
                 exec(util.format("git tag v%s", self.version));
                 exec("git push -q --tags origin master");
+                exec("npm adduser")
                 exec("npm publish ./");
             })
         });
@@ -35,9 +36,11 @@
         var version = util.format(/v%s/, this.version);
         git().listRemote(['--tags'], this.gitUrl, function(err, data) {
            if(err) return cb(err);
-           if(!data) return cb(null, true);
-           console.log(data.test(version))
-           return cb(null, data.match(version));
+           var latestTag = data.slice(-1)[0];
+           console.log(latestTag);
+           if(!latestTag) return cb(null, true);
+           console.log(regex.test(latestTag))
+           return cb(null, regex.test(latestTag));
         });
     }
 }
