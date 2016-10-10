@@ -37,7 +37,7 @@
         git().listRemote(['--tags'], this.gitUrl, function(err, data) {
            if(err) return cb(err);
            if(!data) return cb(null, true);
-           console.log(data.match(version))
+           console.log(data.test(version))
            return cb(null, data.match(version));
         });
     }
