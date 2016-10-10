@@ -11,7 +11,7 @@ var path = require('path'),
     sass = require('node-sass'),
     Mincer = require('mincer'),
     async = require('async'),
-    rsync = require('rsync');
+    Rsync = require('rsync');
 
 module.exports = class AssetProcessor {
     constructor() {

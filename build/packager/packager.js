@@ -10,7 +10,7 @@ var fs = require('fs'),
     templateVersion = require('root-require')('package.json').version,
     async = require('async'),
     shell = require('shelljs/global'),
-    rsync = require('rsync');
+    Rsync = require('rsync');
 
 module.exports = class Packager {
 
