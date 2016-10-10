@@ -85,7 +85,7 @@ module.exports = class Packager {
 
         var copy = this.isWin() ? spawn('robocopy', [path.join(this.repoRoot, "app"), self.targetDir, "/MIR", "/XF"]
             .concat(_.map(self.compiledExtensions, (item) => util.format("*%s", item)))) :
-              spawn('rsync', ['-rtv'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item))).concat(path.join(this.repoRoot, "app"), self.targetDir));
+              spawn('rsync', ['--verbose', '--progress', '--recursive'].concat(_.map(self.compiledExtensions, (item) => util.format("--exclude *%s", item))).concat(path.join(this.repoRoot, "app", "/*"), self.targetDir));
        
         copy.on('exit', function(code) {    
             callback(null, []);
