@@ -38,7 +38,7 @@ class NunjucksProcessor extends TemplateProcessor
     }
 
     placeholder(name) {
-        return util.format("{% block placeholder%s %}{% endblock %}", name);
+        return util.format("{% block %s %}{% endblock %}", name);
     }
 
     asset_path(file) {
