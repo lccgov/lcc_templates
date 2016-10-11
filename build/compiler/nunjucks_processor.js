@@ -27,7 +27,7 @@ class NunjucksProcessor extends TemplateProcessor
             html_end_tag: '</html>',
             asset_path: this.asset_path,
             placeholder: this.placeholder,
-            layout_begin_body:'{% extends "master2.html" %}{% block body_content %}',
+            layout_begin_body:'{% extends "lcc-template.html" %}{% block body_content %}',
             layout_breadcrumb:'{% block breadcrumb %}{% endblock %}',
             layout_header:'{% block header %}{% endblock %}',
             layout_end_body: '{% endblock %}'
