@@ -7,8 +7,7 @@ var TemplateProcessor = require('./template_processor'),
 
 class SharePointProcessor extends TemplateProcessor
 {
-    constructor(file)
-    {
+    constructor(file){
         super(file);
     }
 
@@ -133,8 +132,7 @@ class SharePointProcessor extends TemplateProcessor
        return "sharepoint";
     }
 
-    placeholder(name) 
-    {
+    placeholder(name) {
         return util.format("<WebPartPages:WebPartZone runat="/server/" AllowPersonalization="/false/" ID='%s' FrameType="/TitleBarOnly/" Orientation="/Vertical/"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>", name);
     }
 

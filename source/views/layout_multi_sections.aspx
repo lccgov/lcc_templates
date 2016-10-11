@@ -17,7 +17,7 @@
                   <%= placeholder("placeholder-4") %>
             </div>
         </div>
-                <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <%= placeholder("placeholder-5") %>
             </div>
@@ -154,4 +154,3 @@
     </div>
 </section>
 <%- layout_end_body %>
-

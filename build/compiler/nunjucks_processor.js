@@ -28,7 +28,7 @@ class NunjucksProcessor extends TemplateProcessor
             asset_path: this.asset_path,
             placeholder: this.placeholder,
             layout_begin_body:'{% extends "master2.html" %}{% block body_content %}',
-            layout_breadcrumb:'{% block breadcrumb %} {% endblock %}',
+            layout_breadcrumb:'{% block breadcrumb %}{% endblock %}',
             layout_header:'{% block header %}{% endblock %}',
             layout_end_body: '{% endblock %}'
         }
@@ -36,8 +36,7 @@ class NunjucksProcessor extends TemplateProcessor
         return hash;
     }
 
-    placeholder(name) 
-    {
+    placeholder(name) {
         return util.format("{% block %s %}{% endblock %}", name);
     }
 
