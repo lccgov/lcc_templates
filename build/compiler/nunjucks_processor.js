@@ -1,3 +1,5 @@
+"use strict";
+
 var TemplateProcessor = require('./template_processor'),
     templateVersion = require('root-require')('package.json').version,
     path = require('path'),
@@ -19,14 +21,24 @@ class NunjucksProcessor extends TemplateProcessor
             body_start: '',
             search_box: '{% include "includes/search_global.html" %}',
             main_nav: '{% include "includes/nav_global.html" %}',
-            body_content: '{% block bodycontent %}{% endblock %}',
+            body_content: '{% block body_content %}{% endblock %}',
             footer_nav: '{% include "includes/footer_global.html" %}',
             body_end: '',
             html_end_tag: '</html>',
-            asset_path: this.asset_path
+            asset_path: this.asset_path,
+            placeholder: this.placeholder,
+            layout_begin_body:'{% extends "master2.html" %}{% block body_content %}',
+            layout_breadcrumb:'{% block breadcrumb %} {% endblock %}',
+            layout_header:'{% block header %}{% endblock %}',
+            layout_end_body: '{% endblock %}'
         }
 
         return hash;
+    }
+
+    placeholder(name) 
+    {
+        return util.format("{% block %s %}{% endblock %}", name);
     }
 
     asset_path(file) {

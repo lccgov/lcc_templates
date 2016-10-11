@@ -1,3 +1,5 @@
+"use strict";
+
 var Packager = require('./packager'),
     NunjucksProcessor = require('./../compiler/nunjucks_processor'),
     templateVersion = require('root-require')('package.json').version,

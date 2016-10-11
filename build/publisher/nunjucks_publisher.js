@@ -1,3 +1,5 @@
+  "use strict";
+  
   var fs = require('fs'),
       path = require('path'),
       shell = require('shelljs/global'),

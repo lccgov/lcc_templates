@@ -1,3 +1,5 @@
+"use strict";
+
 var fs = require('fs'),
     path = require('path'),
     SharePointProcessor = require('../compiler/sharepoint_processor'),

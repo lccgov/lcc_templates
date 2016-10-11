@@ -1,3 +1,5 @@
+"use strict";
+
 var Packager = require('./packager'),
     SharePointProcessor = require('./../compiler/sharepoint_processor'),
     templateVersion = require('root-require')('package.json').version,

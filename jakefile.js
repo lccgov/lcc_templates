@@ -1,3 +1,5 @@
+ "use strict";
+ 
  var AssetProcessor = require('./build/compiler/asset_processor'),
      NunjucksPackager = require('./build/packager/nunjucks_packager'),
      SharePointPackager = require('./build/packager/sharepoint_packager'),

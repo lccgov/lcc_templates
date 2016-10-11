@@ -1,3 +1,5 @@
+"use strict";
+
 var TemplateProcessor = require('./template_processor'),
     templateVersion = require('root-require')('package.json').version,
     path = require('path'),
@@ -124,6 +126,11 @@ class SharePointProcessor extends TemplateProcessor
 
     get templateEngine() {
        return "sharepoint";
+    }
+
+    placeholder(name) 
+    {
+        return util.format("<WebPartPages:WebPartZone runat="/server/" AllowPersonalization="/false/" ID='%s' FrameType="/TitleBarOnly/" Orientation="/Vertical/"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>", name);
     }
 
     asset_path(file) {
