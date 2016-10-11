@@ -133,7 +133,7 @@ class SharePointProcessor extends TemplateProcessor
     }
 
     placeholder(name) {
-        return util.format("<WebPartPages:WebPartZone runat="/server/" AllowPersonalization="/false/" ID='%s' FrameType="/TitleBarOnly/" Orientation="/Vertical/"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>", name);
+        return util.format('<WebPartPages:WebPartZone runat="server" AllowPersonalization="false" ID="%s" FrameType="TitleBarOnly" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>', name);
     }
 
     asset_path(file) {
