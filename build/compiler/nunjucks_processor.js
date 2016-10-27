@@ -45,7 +45,7 @@ class NunjucksProcessor extends TemplateProcessor
         var query_string = templateVersion;
         switch(path.extname(file)) {
             case '.css':
-                return util.format("{{ asset_path }}stylesheets/%s?%s", file, query_string)
+                return util.format('<link rel="stylesheet" href="{{ asset_path }}stylesheets/%s?%s" />', file, query_string)
             case '.js':
                 return util.format("{{ asset_path }}javascripts/%s?%s", file, query_string)
             default:
