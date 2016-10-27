@@ -141,7 +141,7 @@ class SharePointProcessor extends TemplateProcessor
         var query_string = templateVersion;
         switch(path.extname(file)) {
             case '.css':         
-                return util.format('<SharePoint:CssRegistration name="&lt;% $SPUrl:~sitecollection/_catalogs/masterpage/public/stylesheets/%s?%s %&gt;" runat="server" after="corev15.css"/>', file, query_string)
+                return util.format('<SharePoint:CssRegistration name="&lt;% $SPUrl:~sitecollection/_catalogs/masterpage/public/stylesheets/%s?%s %&gt;" runat="server" />', file, query_string)
             case '.js':
                 return util.format("/_catalogs/masterpage/public/javascripts/%s?%s", file, query_string)
             default:
