@@ -210,12 +210,7 @@
 
         $(window).resize(function () {
             $.resizeSearchResults();
-        });    
- 
-    return {
-        activate: activateResponsiveDesign
-    }
-    
+        });        
     }
    global.LCC = LCC;
 })(window)
