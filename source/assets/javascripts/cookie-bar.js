@@ -13,7 +13,6 @@
     var message = document.getElementById('global-cookie-message');
     if (message) {
       $(message).on('click', '.js-seen-cookie-message', function (event) {
-        event.preventDefault();
         LCC.Cookie.cookieCommand('seen_cookie_message', 'yes', { days: 28 });
       });
 
