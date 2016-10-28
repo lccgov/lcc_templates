@@ -119,10 +119,29 @@ class SharePointProcessor extends TemplateProcessor
             html_end_tag: "</SharePoint:SPHtmlTag>",
             asset_path: this.asset_path,
             placeholder: this.placeholder,
-            layout_begin_body:'',
-            layout_breadcrumb:'<ASP:SITEMAPPATH runat="server" sitemapproviders="SPSiteMapProvider,SPXmlContentMapProvider" rendercurrentnodeaslink="false" hideinteriorrootnodes="true" RootNodeStyle-CssClass="bc-root"><PATHSEPARATORTEMPLATE><ASP:IMAGE id="Image1" runat="Server" imageurl="/_catalogs/masterpage/images/breadcrumb_line.png"></ASP:IMAGE></PATHSEPARATORTEMPLATE></ASP:SITEMAPPATH>',
+            layout_begin_body:'<%@ Page language="C#" Inherits="Microsoft.SharePoint.Publishing.PublishingLayoutPage,Microsoft.SharePoint.Publishing,Version=15.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" %> \
+                                <%@ Register Tagprefix="SharePointWebControls" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls" Assembly="Microsoft.SharePoint.Publishing, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> \
+                                <asp:Content ContentPlaceholderID="PlaceHolderAdditionalPageHead" runat="server"> \
+                                    <SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/pagelayouts15.css %>" runat="server"/> \
+                                    <PublishingWebControls:EditModePanel runat="server"> \
+                                        <!-- Styles for edit mode only--> \
+                                        <SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/editmode15.css %>" \
+                                            After="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/pagelayouts15.css %>" runat="server"/> \
+                                    </PublishingWebControls:EditModePanel> \
+                                </asp:Content> \
+                                <asp:Content ContentPlaceHolderId="PlaceHolderPageTitle" runat="server"> \
+                                    <SharePointWebControls:ListProperty Property="Title" runat="server"/> - <SharePointWebControls:FieldValue FieldName="Title" runat="server"/> \
+                                </asp:Content> \
+                                <asp:Content ContentPlaceHolderId="PlaceHolderPageTitleInTitleArea" runat="server"> \
+                                    <SharePointWebControls:FieldValue FieldName="Title" runat="server" /> \
+                                </asp:Content> \
+                                <asp:Content ContentPlaceHolderId="PlaceHolderPageDescription" runat="server"> \
+                                    <SharePointWebControls:ProjectProperty Property="Description" runat="server"/> \
+                                </asp:Content> \
+                                <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">',
+            layout_breadcrumb:'<ASP:SITEMAPPATH runat="server" sitemapproviders="SPSiteMapProvider,SPXmlContentMapProvider" rendercurrentnodeaslink="false" hideinteriorrootnodes="true" RootNodeStyle-CssClass="bc-root"><PATHSEPARATORTEMPLATE><ASP:IMAGE id="Image1" runat="Server"      imageurl="/_catalogs/masterpage/images/breadcrumb_line.png"></ASP:IMAGE></PATHSEPARATORTEMPLATE></ASP:SITEMAPPATH>',
             layout_header:'<PageFieldTextField:TextField FieldName="fa564e0f-0c70-4ab9-b863-0177e6ddd247" runat="server" />',
-            layout_end_body: '',
+            layout_end_body: '</asp:Content>',
             application_css: ''
         }
 
