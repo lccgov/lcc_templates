@@ -174,10 +174,10 @@ module.exports = class AssetProcessor {
                     // move the images into the stylesheets folder so they are relative to the stylesheets which call them
                     var targetFile = path.join(self.buildDir, 'assets', 'stylesheets', 'images', asset.logicalPath);
 
-                    assetTasks.push(function(cb) {      
-                        fs.open(targetFile, 'w+', (err, fd) => {
-                            if (err) throw err;
-                            fs.write(fd, asset, (err) => {
+                    assetTasks.push(function(cb) {    
+                        fs.readFile(asset.pathname, function (err, data) {
+                            if (err) cb(err);
+                            fs.writeFile(targetFile, data, function (err) {
                                 if (err) cb(err);
                                 cb(null, []);
                             });
@@ -186,7 +186,7 @@ module.exports = class AssetProcessor {
                 });
 
                 async.parallel(assetTasks, function(err, results) {
-                    if (err) throw err;
+                    if (err) callback(err);
                     callback(null, []);
                 });
             });
