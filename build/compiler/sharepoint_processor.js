@@ -160,7 +160,7 @@ class SharePointProcessor extends TemplateProcessor
         var query_string = templateVersion;
         switch(path.extname(file)) {
             case '.css':         
-                return util.format('<link rel="stylesheet" href=/_catalogs/masterpage/public/stylesheets/%s?%s" />', file, query_string)
+                return util.format('<link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/%s?%s" />', file, query_string)
             case '.js':
                 return util.format("/_catalogs/masterpage/public/javascripts/%s?%s", file, query_string)
             default:
