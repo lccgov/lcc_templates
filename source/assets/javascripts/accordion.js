@@ -1,4 +1,4 @@
-    (function (global) {
+    (function (global, $) {
     "use strict";
     var LCC = global.LCC || {};
 	    LCC.Accordion = LCC.Accordion || {};
@@ -28,4 +28,4 @@
 
     }
    global.LCC = LCC;
-})(window)
+})(window, jQuery)
