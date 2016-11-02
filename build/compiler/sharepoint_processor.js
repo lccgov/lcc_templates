@@ -142,7 +142,7 @@ class SharePointProcessor extends TemplateProcessor
             layout_breadcrumb:'<ASP:SITEMAPPATH runat="server" sitemapproviders="SPSiteMapProvider,SPXmlContentMapProvider" rendercurrentnodeaslink="false" hideinteriorrootnodes="true" RootNodeStyle-CssClass="bc-root"><PATHSEPARATORTEMPLATE><ASP:IMAGE id="Image1" runat="Server"      imageurl="/_catalogs/masterpage/images/breadcrumb_line.png"></ASP:IMAGE></PATHSEPARATORTEMPLATE></ASP:SITEMAPPATH>',
             layout_header:'<SharePointWebControls:TextField FieldName="fa564e0f-0c70-4ab9-b863-0177e6ddd247" runat="server" />',
             layout_end_body: '</asp:Content>',
-            application_css: util.format('<link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/application.css?%s" />', templateVersion)
+            application_css: util.format('<!-- build:css --><link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/application.css?%s" /><!-- endbuild -->', templateVersion)
         }
 
         return hash;
