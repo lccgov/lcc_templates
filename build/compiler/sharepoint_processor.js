@@ -85,8 +85,8 @@ class SharePointProcessor extends TemplateProcessor
                         </SharePoint:SPSecurityTrimmedControl> \
                         <div id="ms-designer-ribbon"> \
                             <PublishingRibbon:PublishingRibbon runat="server" />  \
-                        </div> \
-                        <SharePoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly"> \
+                        </div>',
+            signin: '  <SharePoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly"> \
                             <wssucw:Welcome runat="server" EnableViewState="false"> \
                             </wssucw:Welcome> \
                         </SharePoint:SPSecurityTrimmedControl>',
