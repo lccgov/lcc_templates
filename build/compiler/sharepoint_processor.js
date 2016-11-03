@@ -164,7 +164,7 @@ class SharePointProcessor extends TemplateProcessor
             case '.js':
                 return util.format("/_catalogs/masterpage/public/javascripts/%s?%s", file, query_string)
             default:
-                return util.format("/_catalogs/masterpage/public/img/%s?%s", file, query_string)
+                return util.format("/_catalogs/masterpage/public/images/%s?%s", file, query_string)
         }
    }
 }
