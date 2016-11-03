@@ -130,7 +130,7 @@ class SharePointProcessor extends TemplateProcessor
                                     </PublishingWebControls:EditModePanel> \
                                 </asp:Content> \
                                 <asp:Content ContentPlaceHolderId="PlaceHolderPageTitle" runat="server"> \
-                                    <SharePointWebControls:ListProperty Property="Title" runat="server"/> - <SharePointWebControls:FieldValue FieldName="Title" runat="server"/> \
+                                    <SharePointWebControls:FieldValue FieldName="Title" runat="server"/> \
                                 </asp:Content> \
                                 <asp:Content ContentPlaceHolderId="PlaceHolderPageTitleInTitleArea" runat="server"> \
                                     <SharePointWebControls:FieldValue FieldName="Title" runat="server" /> \
