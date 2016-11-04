@@ -7,19 +7,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="" />
         <meta name="author" content="" />  
+        <link rel="apple-touch-icon" sizes="180x180" href="<%- asset_path("apple-touch-icon.png") %>">
+        <link rel="icon" type="image/png" href="<%- asset_path("favicon-32x32.png") %>" sizes="32x32">
+        <link rel="icon" type="image/png" href="<%- asset_path("favicon-16x16.png") %>" sizes="16x16">
+        <link rel="shortcut icon" href="<%- asset_path("favicon.ico") %>">
+        <link rel="manifest" href="<%- asset_path("manifest.json") %>">
+        <link rel="mask-icon" href="<%- asset_path("safari-pinned-tab.svg") %>" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
         <!-- Bootstrap CSS -->
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Font Awesome -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-        <!-- Template CSS -->
-        <%- asset_path("lcc-template.css") %>
-        <%- application_css %>
         <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
         <script src="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
         <meta name="GENERATOR" content="Microsoft SharePoint" />
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta http-equiv="Expires" content="0" />
         <%- head_end %>
+        <!-- Template CSS -->
+        <%- asset_path("lcc-template.css") %>
+        <!-- Application CSS -->
+        <%- application_css %>
         </head>
     <body <%- body_attribute %>>
     <%- body_start %>
@@ -29,7 +37,7 @@
 				<div id="containerSiteStatement">
                     <div id="siteStatement">
                         <div id="global-cookie-message" class="pageControl container noindex" style="display:none">
-                            <p>Cookies - We use cookies to help improve your experience of using our website. For more information about the cookies we use see our <a href="/_catalogs/masterpage/subsites/PrivacyStatement.aspx">privacy page</a>. If you continue without changing your cookie settings we assume that you are happy with our use of cookies. You can change your cookie settings at any time by following the instructions on our <a href="/_catalogs/masterpage/subsites/PrivacyStatement.aspx">privacy page</a>  </p>
+                            <p>Cookies - We use cookies to help improve your experience of using our website. For more information about the cookies we use see our <a href="/Pages/PrivacyStatement.aspx">privacy page</a>. If you continue without changing your cookie settings we assume that you are happy with our use of cookies. You can change your cookie settings at any time by following the instructions on our <a href="/Pages/PrivacyStatement.aspx">privacy page</a>  </p>
                             <a class="submit js-seen-cookie-message" href="">Don't show this message again</a>
                         </div>
                     </div>
@@ -42,18 +50,6 @@
                             </a>
                             <div class="pull-right">
                                 <ul class="menu">
-                                    <li>
-                                        <a href="#" class="signin">
-                                            <span>Sign in
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="myAccount" data-toggle="tooltip" data-placement="bottom" title="My Account">
-                                            <span>Your account
-                                            </span>
-                                        </a>
-                                    </li>
                                     <li>
                                         <div class="nav-search" id="nav-search">
                                             <div class="">
@@ -161,6 +157,9 @@
                                             <a href="#">Contact Us
                                             </a>
                                         </li>
+                                        <li>
+                                            <%- signin %>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -209,6 +208,7 @@
                 <!-- BACK TO TOP -->
                 <a href="#0" class="cd-top">Top</a>
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script>
+                <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.0/jquery-migrate.min.js" type="text/javascript"></script>
                 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js" type="text/javascript"></script>
                 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 				<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>

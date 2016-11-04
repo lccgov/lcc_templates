@@ -19,6 +19,7 @@ class NunjucksProcessor extends TemplateProcessor
             head_attribute: '',
             body_attribute: '',
             body_start: '',
+            signin: '<a href="#" class="signin"><span>Sign in</span></a>', 
             search_box: '{% include "includes/search_global.html" %}',
             main_nav: '{% block main_nav %}{% endblock %}',
             body_content: '{% block body_content %}{% endblock %}',

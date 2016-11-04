@@ -85,8 +85,8 @@ class SharePointProcessor extends TemplateProcessor
                         </SharePoint:SPSecurityTrimmedControl> \
                         <div id="ms-designer-ribbon"> \
                             <PublishingRibbon:PublishingRibbon runat="server" />  \
-                        </div> \
-                        <SharePoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly"> \
+                        </div>',
+            signin: '  <SharePoint:SPSecurityTrimmedControl runat="server" AuthenticationRestrictions="AnonymousUsersOnly"> \
                             <wssucw:Welcome runat="server" EnableViewState="false"> \
                             </wssucw:Welcome> \
                         </SharePoint:SPSecurityTrimmedControl>',
@@ -130,7 +130,7 @@ class SharePointProcessor extends TemplateProcessor
                                     </PublishingWebControls:EditModePanel> \
                                 </asp:Content> \
                                 <asp:Content ContentPlaceHolderId="PlaceHolderPageTitle" runat="server"> \
-                                    <SharePointWebControls:ListProperty Property="Title" runat="server"/> - <SharePointWebControls:FieldValue FieldName="Title" runat="server"/> \
+                                    <SharePointWebControls:FieldValue FieldName="Title" runat="server"/> \
                                 </asp:Content> \
                                 <asp:Content ContentPlaceHolderId="PlaceHolderPageTitleInTitleArea" runat="server"> \
                                     <SharePointWebControls:FieldValue FieldName="Title" runat="server" /> \
@@ -142,7 +142,7 @@ class SharePointProcessor extends TemplateProcessor
             layout_breadcrumb:'<ASP:SITEMAPPATH runat="server" sitemapproviders="SPSiteMapProvider,SPXmlContentMapProvider" rendercurrentnodeaslink="false" hideinteriorrootnodes="true" RootNodeStyle-CssClass="bc-root"><PATHSEPARATORTEMPLATE><ASP:IMAGE id="Image1" runat="Server"      imageurl="/_catalogs/masterpage/images/breadcrumb_line.png"></ASP:IMAGE></PATHSEPARATORTEMPLATE></ASP:SITEMAPPATH>',
             layout_header:'<SharePointWebControls:TextField FieldName="fa564e0f-0c70-4ab9-b863-0177e6ddd247" runat="server" />',
             layout_end_body: '</asp:Content>',
-            application_css: ''
+            application_css: util.format('<!-- build:css --><link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/application.css?%s" /><!-- endbuild -->', templateVersion)
         }
 
         return hash;
@@ -160,11 +160,11 @@ class SharePointProcessor extends TemplateProcessor
         var query_string = templateVersion;
         switch(path.extname(file)) {
             case '.css':         
-                return util.format('<SharePoint:CssRegistration name="&lt;% $SPUrl:~sitecollection/_catalogs/masterpage/public/stylesheets/%s?%s %&gt;" runat="server" />', file, query_string)
+                return util.format('<link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/%s?%s" />', file, query_string)
             case '.js':
                 return util.format("/_catalogs/masterpage/public/javascripts/%s?%s", file, query_string)
             default:
-                return util.format("/_catalogs/masterpage/public/img/%s?%s", file, query_string)
+                return util.format("/_catalogs/masterpage/public/images/%s?%s", file, query_string)
         }
    }
 }

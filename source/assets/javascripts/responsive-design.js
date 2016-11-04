@@ -1,4 +1,4 @@
-  (function (global) {
+  (function (global, $) {
     "use strict";
     var LCC = global.LCC || {};
 	    LCC.ResponsiveDesign = LCC.ResponsiveDesign || {};
@@ -64,4 +64,4 @@
         });
     }
    global.LCC = LCC;
-})(window)
+})(window, jQuery)

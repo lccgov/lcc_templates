@@ -1,4 +1,4 @@
-    (function (global) {
+    (function (global, $) {
     "use strict";
     var LCC = global.LCC || {};
 	    LCC.OtherStuff = LCC.OtherStuff || {};
@@ -102,20 +102,20 @@
 
 
     // event date show first three event list items
-      jQuery('ul.date-list').each(function () {
-      var LiN = jQuery(this).find('li').length;
+      $('ul.date-list').each(function () {
+      var LiN = $(this).find('li').length;
       if (LiN > 3) {
-      jQuery('li', this).eq(2).nextAll().hide().addClass('toggleable');
-      jQuery(this).append('<a class="plusMinus">Show more...</a>');
+      $('li', this).eq(2).nextAll().hide().addClass('toggleable');
+      $(this).append('<a class="plusMinus">Show more...</a>');
       }
       });
-      jQuery('ul.date-list').on('click', '.plusMinus', function () {
-      if (jQuery(this).hasClass('active')) {
-      jQuery(this).text('Show more...').removeClass('active');
+      $('ul.date-list').on('click', '.plusMinus', function () {
+      if ($(this).hasClass('active')) {
+      $(this).text('Show more...').removeClass('active');
       } else {
-      jQuery(this).text('Show less...').addClass('active');
+      $(this).text('Show less...').addClass('active');
       }
-      jQuery(this).siblings('li.toggleable').slideToggle();
+      $(this).siblings('li.toggleable').slideToggle();
       });
 
 
@@ -123,7 +123,7 @@
     
     //animated scroll
     
-      jQuery(document).ready(function($) {
+      $(document).ready(function($) {
         $(".scroll").click(function(event) {
         event.preventDefault();
         $('html,body').animate( { scrollTop:$(this.hash).offset().top } , 1000);
@@ -213,4 +213,4 @@
         });        
     }
    global.LCC = LCC;
-})(window)
+})(window, jQuery)

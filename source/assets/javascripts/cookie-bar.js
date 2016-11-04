@@ -1,4 +1,4 @@
-(function (global) {
+(function (global, $) {
   "use strict";
 
   var LCC = global.LCC || {};
@@ -80,4 +80,4 @@
   };
 
   global.LCC = LCC;
-})(window);
+})(window, jQuery);
