@@ -253,7 +253,7 @@ module.exports = class AssetProcessor {
                 self.makePath("views", cb);
             }
         ], function(err, results) {
-            if (err) throw err;
+            if (err) callback(err);
             callback(null, results);
         });
     }
