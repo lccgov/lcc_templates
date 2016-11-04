@@ -1,0 +1,76 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\00772604\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'jake',
+1 verbose cli   '-g' ]
+2 info using npm@3.10.6
+3 info using node@v4.4.7
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData jake
+8 silly fetchNamedPackageData jake
+9 silly mapToRegistry name jake
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'jake',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   escapedName: 'jake',
+12 silly mapToRegistry   name: 'jake',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri https://registry.npmjs.org/jake
+14 verbose request uri https://registry.npmjs.org/jake
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 2:48:19 PM
+17 verbose request id 943a46b846cf7c8e
+18 http request GET https://registry.npmjs.org/jake
+19 info retry will retry, error on last attempt: Error: connect ECONNREFUSED 151.101.60.162:443
+20 info attempt registry request try #2 at 2:48:31 PM
+21 http request GET https://registry.npmjs.org/jake
+22 info retry will retry, error on last attempt: Error: connect ECONNREFUSED 151.101.60.162:443
+23 info attempt registry request try #3 at 2:49:32 PM
+24 http request GET https://registry.npmjs.org/jake
+25 silly fetchPackageMetaData Error: connect ECONNREFUSED 151.101.60.162:443
+25 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:873:11)
+25 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:896:20)
+25 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1077:14)
+25 silly fetchPackageMetaData  error for jake { [Error: connect ECONNREFUSED 151.101.60.162:443]
+25 silly fetchPackageMetaData   code: 'ECONNREFUSED',
+25 silly fetchPackageMetaData   errno: 'ECONNREFUSED',
+25 silly fetchPackageMetaData   syscall: 'connect',
+25 silly fetchPackageMetaData   address: '151.101.60.162',
+25 silly fetchPackageMetaData   port: 443 }
+26 silly rollbackFailedOptional Starting
+27 silly rollbackFailedOptional Finishing
+28 silly runTopLevelLifecycles Starting
+29 silly runTopLevelLifecycles Finishing
+30 silly install printInstalled
+31 verbose stack Error: connect ECONNREFUSED 151.101.60.162:443
+31 verbose stack     at Object.exports._errnoException (util.js:873:11)
+31 verbose stack     at exports._exceptionWithHostPort (util.js:896:20)
+31 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1077:14)
+32 verbose cwd c:\code\lcc_templates
+33 error Windows_NT 6.1.7601
+34 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\00772604\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "install" "jake" "-g"
+35 error node v4.4.7
+36 error npm  v3.10.6
+37 error code ECONNREFUSED
+38 error errno ECONNREFUSED
+39 error syscall connect
+40 error Error: connect ECONNREFUSED 151.101.60.162:443
+40 error     at Object.exports._errnoException (util.js:873:11)
+40 error     at exports._exceptionWithHostPort (util.js:896:20)
+40 error     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1077:14)
+40 error  { [Error: connect ECONNREFUSED 151.101.60.162:443]
+40 error   code: 'ECONNREFUSED',
+40 error   errno: 'ECONNREFUSED',
+40 error   syscall: 'connect',
+40 error   address: '151.101.60.162',
+40 error   port: 443 }
+41 error If you are behind a proxy, please make sure that the
+41 error 'proxy' config is set properly.  See: 'npm help config'
+42 verbose exit [ 1, true ]
