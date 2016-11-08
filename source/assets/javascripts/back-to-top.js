@@ -1,8 +1,10 @@
-(function (global, $) {
+(function (global) {
     "use strict";
-	 var LCC = global.LCC || {}
-  		 LCC.Modules = LCC.Modules || {}
 
+	var $ = global.jQuery
+	var LCC = global.LCC || {}
+		LCC.Modules = LCC.Modules || {}
+		
  	LCC.Modules.BackToTop = function () {
 		this.start = function (element) {
 			// browser window scroll (in pixels) after which the "back to top" link is shown
@@ -32,4 +34,4 @@
    
 	global.LCC = LCC
   
-})(window, jQuery);
+})(window);
