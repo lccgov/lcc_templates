@@ -3,3 +3,4 @@ pkg/
 app/
 .vscode/
 lcc_template*/
+npm-debug.log

@@ -18,7 +18,7 @@
         $(container).each(function() {
             $el = $(this);
             $($el).height('auto')
-            topPostion = $el.position().top;
+            topPosition = $el.position().top;
 
             if (currentRowStart != topPostion) {
                 for (currentDiv = 0 ; currentDiv < rowDivs.length ; currentDiv++) {
