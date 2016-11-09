@@ -1,31 +1,29 @@
-    (function (global, $) {
+(function (global, $) {
     "use strict";
-    var LCC = global.LCC || {};
-	    LCC.Accordion = LCC.Accordion || {};
+    
+    var LCC = global.LCC || {}
+        LCC.Modules = LCC.Modules || {}
+                                
+    LCC.Modules.Accordion = function () {
+        this.start = function (element) {
+            var drawer_panel = element.data('accordion-drawer-panel') ? element.data('accordion-drawer-panel') : '.accordion-drawer h3 ~ div',
+                drawer_header = element.data('accordion-drawer-header') ? element.data('accordion-drawer-header') : '.accordion-drawer h3';
 
-    $(document).ready(function () {
-        LCC.Accordion.activate();
-    });
-
-    LCC.Accordion.activate = function () {
-         //Accordion 
-         $('.expandContent h3 ~ div').hide();
-
-         $(".expandContent h3").on("click", function()
+            $(element).find(drawer_panel).hide();
+            $(element).find(drawer_header).on("click", function()
             {
                 $(this).toggleClass("active");
-                var p = $(this).next('div').slideToggle();				
-                if ($(this).children().find('#tooltip').text() === "Click to expand")
-                {
+                $(this).next('div').slideToggle();                                                                
+                if ($(this).children().find('#tooltip').text() === "Click to expand") {
                     $(this).children().find('#tooltip').text('Click to hide')
                 }
-                else
-                {
+                else {
                     $(this).children().find('#tooltip').text('Click to expand')
                 }
                 return false;
-           });  
-
-    }
-   global.LCC = LCC;
+            });  
+        }   
+    };
+   
+    global.LCC = LCC
 })(window, jQuery)
