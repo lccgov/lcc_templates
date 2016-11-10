@@ -1,7 +1,9 @@
 //= require modules
 //= require cookie-bar
-//= require back-to-top
-//= require responsive-design
-//= require accordion
-//= require carousel
-//= require scroll-to
+//= require main-menu
+//= require global-search
+//= require equal-heights
+//= require modules/back-to-top
+//= require modules/accordion
+//= require modules/carousel
+//= require modules/scroll-to
