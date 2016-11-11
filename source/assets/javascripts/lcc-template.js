@@ -3,6 +3,7 @@
 //= require main-menu
 //= require global-search
 //= require equal-heights
+//= require accessible-media-player
 //= require modules/back-to-top
 //= require modules/accordion
 //= require modules/carousel
