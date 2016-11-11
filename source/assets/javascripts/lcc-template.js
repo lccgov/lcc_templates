@@ -7,3 +7,4 @@
 //= require modules/accordion
 //= require modules/carousel
 //= require modules/scroll-to
+//= require modules/prevent-default
