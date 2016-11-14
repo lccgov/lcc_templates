@@ -4,6 +4,7 @@
 //= require global-search
 //= require equal-heights
 //= require accessible-media-player
+//= require sticky-ribbon
 //= require modules/back-to-top
 //= require modules/accordion
 //= require modules/carousel
