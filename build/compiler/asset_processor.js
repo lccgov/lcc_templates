@@ -48,7 +48,7 @@ module.exports = class AssetProcessor {
             javascriptTasks.push(function(cb) {
                 fs.open(targetFile, 'w', (err, fd) => {
                     if (err) throw err;
-                    fs.writeFile(fd, asset.toString(), (err) => {
+                    fs.writeFile(fd, asset, (err) => {
                         if (err) throw err;
                         callback(null, []);
                     });
