@@ -5,6 +5,7 @@
 //= require equal-heights
 //= require accessible-media-player
 //= require sticky-ribbon
+//= require jquery-ui-datepicker
 //= require modules/back-to-top
 //= require modules/accordion
 //= require modules/carousel
