@@ -1,6 +1,10 @@
 (function(global, $) {
     "use strict";
     $(document).ready(function() {
+        if($('#ms-designer-ribbon').length === 0) {
+            return;
+        }
+
         var elementPosTop = $('#ms-designer-ribbon').position().top;
         
         $(global).scroll(function() {
