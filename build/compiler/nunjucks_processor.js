@@ -32,6 +32,7 @@ class NunjucksProcessor extends TemplateProcessor
             layout_breadcrumb:'{% block breadcrumb %}{% endblock %}',
             layout_header:'{% block header %}{% endblock %}',
             layout_pageContent:'{% block pageContent %}{% endblock %}',
+            layout_editPanel:'{% block editPanel %}{% endblock %}',
             layout_end_body: '{% endblock %}',
             application_css: '{% block css_register %}{% endblock %}'
         }
