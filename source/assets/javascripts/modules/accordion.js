@@ -6,8 +6,8 @@
                                 
     LCC.Modules.Accordion = function () {
         this.start = function (element) {
-            var drawer_panel = element.data('accordion-drawer-panel') ? element.data('accordion-drawer-panel') : '.accordion-drawer h3 ~ div',
-                drawer_header = element.data('accordion-drawer-header') ? element.data('accordion-drawer-header') : '.accordion-drawer h3';
+            var drawer_panel = element.data('accordion-drawer-panel') ? element.data('accordion-drawer-panel') : '.accordion-drawer a ~ div',
+                drawer_header = element.data('accordion-drawer-header') ? element.data('accordion-drawer-header') : '.accordion-drawer a';
 
             $(element).find(drawer_panel).hide();
             $(element).find(drawer_header).on("click", function()
