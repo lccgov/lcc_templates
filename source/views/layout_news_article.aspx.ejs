@@ -18,34 +18,38 @@
             </div>
             <div class="col-md-4">
                   <%- placeholder("sectionOneRightHandColumn") %>
-                  <div id="keywordFilter" data-module="keyword-filter" class="SearchControlContainerKeyword" data-module-started="false">
+                  <div id="keywordFilter" data-module="keyword-filter" class="sectionSubsite news" data-module-started="false">
                         <h3>View News By Keyword</h3>
-                            <div class="inner">
+                    
                                 <input type="text" class="js-keyword">
                                 <a href="#" class="button js-keyword-submit">Go</a>
-                            </div>
+                          
                  </div>
-                 <div id="dateRangeFilter" class="SearchControlContainerDate" data-module="date-range-filter" data-module-started="false">
+                 <div id="dateRangeFilter" class="sectionSubsite news" data-module="date-range-filter" data-module-started="false">
                     <h3>View News By Date</h3>
-                            <div class="inner">
-                                <input type="text" class="datepicker js-date-range-start hasDatepicker">
-                                <input type="text" class="datepicker js-date-range-end hasDatepicker">
+                            <div class="datePickerContainer">
+                                <label for="Start-date">Start date</label>    
+                                <input name="Start-date" type="text" class="datepicker js-date-range-start hasDatepicker">
+                                </div>
+                                  <div class="datePickerContainer">
+                                <label for="End-date">End date</label>    
+                                <input name="End-date" type="text" class="datepicker js-date-range-end hasDatepicker">
                                 <a href="#" class="button js-date-range-submit">Go</a>
                             </div>
                  </div>
                  <div>
-                <div data-module="news-archive-filter" class="archiveContainer" data-module-started="false">
+                <div data-module="news-archive-filter" class="sectionSubsite news" data-module-started="false">
                     <h3>News Archive</h3>
                     <div id="archive">
                 </div>
                 </div>
 
                 <script id="archive-template" type="text/x-handlebars-template">
-                 <ul class="accordionWP" data-module="accordion">
+                 <ul class="accordion" data-module="accordion">
                     {{#each Years}}
                     <li>
                     <div class="accordion-drawer">
-                    <h3 class="accordion"><a href="#"><span id="tooltip" class="sr-only">Click to expand</span>{{year}}</a></h3>
+                   <a class="header" href="#"><span id="tooltip" class="sr-only">Click to expand</span>{{year}}</a>
                     {{#months}}
                         <div class="content-block"><a class="js-news-archive-filter-submit" data-year='{{../year}}' data-month='{{month}}' href="#">{{monthAsString}}</a></div>
                     {{/months}}
@@ -74,123 +78,6 @@
             </div>
         </div>
     </div>
-    </div>
-</section>
-<%- placeholder("sectionTwoTop") %>
-<section class="sectionTwo" id="sectionTwo">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-               <%- placeholder("sectionTwoFull") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-             <%- placeholder("sectionTwoContent") %>
-            </div>
-            <div class="col-md-4">
-               <%- placeholder("sectionTwoRightHandColumn") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-               <%- placeholder("sectionTwoThirdCol1") %>
-            </div>
-            <div class="col-md-4">
-               <%- placeholder("sectionTwoThirdCol2") %>
-            </div>
-            <div class="col-md-4">
-              <%- placeholder("sectionTwoThirdCol3") %>
-            </div>
-        </div>
-    </div>
-</section>
-<%- placeholder("sectionThreeTop") %>
-<section class="sectionThree" id="sectionThree">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-              <%- placeholder("sectionThreeFull") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-             <%- placeholder("sectionThreeContent") %>
-            </div>
-            <div class="col-md-4">
-           <%- placeholder("sectionThreeRightHandColumn") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-               <%- placeholder("sectionThreeThirdCol1") %>
-            </div>
-            <div class="col-md-4">
-               <%- placeholder("sectionThreeThirdCol2") %>
-            </div>
-            <div class="col-md-4">
-               <%- placeholder("sectionThreeThirdCol3") %>
-            </div>
-        </div>
-    </div>
-</section>
-<%- placeholder("sectionFourTop") %>
-<section class="sectionFour" id="sectionFour">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-               <%- placeholder("sectionFourFull") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-             <%- placeholder("sectionFourContent") %>
-
-            </div>
-            <div class="col-md-4">
-               <%- placeholder("sectionFourRightHandColumn") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-               <%- placeholder("sectionFourThirdCol1") %>
-            </div>
-            <div class="col-md-4">
-                <%- placeholder("sectionFourThirdCol2") %>
-            </div>
-            <div class="col-md-4">
-               <%- placeholder("sectionFourThirdCol3") %>
-            </div>
-        </div>
-    </div>
-</section>
-<%- placeholder("sectionFiveTop") %>
-<section class="sectionFive" id="sectionFive">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-              <%- placeholder("sectionFiveFull") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-              <%- placeholder("sectionFiveContent") %>
-            </div>
-            <div class="col-md-4">
-              <%- placeholder("sectionFiveRightHandColumn") %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-             <%- placeholder("sectionFiveThirdCol1") %>
-            </div>
-            <div class="col-md-4">
-              <%- placeholder("sectionFiveThirdCol2") %>
-            </div>
-            <div class="col-md-4">
-            <%- placeholder("sectionFiveThirdCol3") %>
-            </div>
-        </div>
     </div>
 </section>
 <section>      
