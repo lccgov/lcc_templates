@@ -29,11 +29,11 @@
                     <h3>View News By Date</h3>
                             <div class="datePickerContainer">
                                 <label for="Start-date">Start date</label>    
-                                <input name="Start-date" type="text" class="datepicker js-date-range-start hasDatepicker">
+                                <input name="Start-date" type="text" class="searchDate js-date-range-start hasDatepicker" data-type="datepicker-start-nomin">
                                 </div>
                                   <div class="datePickerContainer">
                                 <label for="End-date">End date</label>    
-                                <input name="End-date" type="text" class="datepicker js-date-range-end hasDatepicker">
+                                <input name="End-date" type="text" class="searchDate js-date-range-end hasDatepicker" data-type="datepicker-end-nomin">
                                 <a href="#" class="button js-date-range-submit">Go</a>
                             </div>
                        <div class="clearfix"></div>     
