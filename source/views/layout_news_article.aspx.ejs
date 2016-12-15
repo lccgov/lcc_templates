@@ -49,13 +49,11 @@
                  <ul class="accordion" data-module="accordion" id="newsAccordion">
                     {{#each Years}}
                     <li>
-                    <div class="accordion-drawer">
-                        <div class="content-block">
-                            <a class="header" href="#"><span id="tooltip" class="sr-only">Click to expand</span>{{year}}</a>
-                            {{#months}}
-                            <a class="js-news-archive-filter-submit" data-year='{{../year}}' data-month='{{month}}' href="#">{{monthAsString}}</a>
-                            {{/months}}
-                        </div>
+                    <div class="accordion-drawer content-block">
+                        <a class="header" href="#"><span id="tooltip" class="sr-only">Click to expand</span>{{year}}</a>
+                        {{#months}}
+                        <a class="js-news-archive-filter-submit" data-year='{{../year}}' data-month='{{month}}' href="#">{{monthAsString}}</a>
+                        {{/months}}
                     </div>
                     </li>
                     {{/each}}
