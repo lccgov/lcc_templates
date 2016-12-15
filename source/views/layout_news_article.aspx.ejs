@@ -29,11 +29,11 @@
                     <h3>View News By Date</h3>
                             <div class="datePickerContainer">
                                 <label for="Start-date">Start date</label>    
-                                <input name="Start-date" type="text" class="searchDate js-date-range-start hasDatepicker" data-type="datepicker-start-nomin">
+                                <input name="Start-date" type="text" class="searchDate js-date-range-start" data-type="datepicker-start-nomin">
                                 </div>
                                   <div class="datePickerContainer">
                                 <label for="End-date">End date</label>    
-                                <input name="End-date" type="text" class="searchDate js-date-range-end hasDatepicker" data-type="datepicker-end-nomin">
+                                <input name="End-date" type="text" class="searchDate js-date-range-end" data-type="datepicker-end-nomin">
                                 <a href="#" class="button js-date-range-submit">Go</a>
                             </div>
                        <div class="clearfix"></div>     
@@ -46,14 +46,16 @@
                 </div>
 
                 <script id="archive-template" type="text/x-handlebars-template">
-                 <ul class="accordion" data-module="accordion">
+                 <ul class="accordion" data-module="accordion" id="newsAccordion">
                     {{#each Years}}
                     <li>
                     <div class="accordion-drawer">
-                   <a class="header" href="#"><span id="tooltip" class="sr-only">Click to expand</span>{{year}}</a>
-                    {{#months}}
-                        <div class="content-block"><a class="js-news-archive-filter-submit" data-year='{{../year}}' data-month='{{month}}' href="#">{{monthAsString}}</a></div>
-                    {{/months}}
+                        <div class="content-block">
+                            <a class="header" href="#"><span id="tooltip" class="sr-only">Click to expand</span>{{year}}</a>
+                            {{#months}}
+                            <a class="js-news-archive-filter-submit" data-year='{{../year}}' data-month='{{month}}' href="#">{{monthAsString}}</a>
+                            {{/months}}
+                        </div>
                     </div>
                     </li>
                     {{/each}}
