@@ -27,17 +27,116 @@
                  </div>
                  <div id="dateRangeFilter" class="sectionSubsite news" data-module="date-range-filter" data-module-started="false">
                     <h3>View News By Date</h3>
-                            <div class="datePickerContainer">
-                                <label for="Start-date">Start date</label>    
-                                <input name="Start-date" type="text" class="searchDate js-date-range-start" data-type="datepicker-start-nomin">
+                            <div class="datePickerContainer">   
+                                <input name="Start-date" type="text" class="searchDate js-date-range-start" data-type="datepicker-start-nomin" placeholder="Start Date">
                                 </div>
                                   <div class="datePickerContainer">
-                                <label for="End-date">End date</label>    
-                                <input name="End-date" type="text" class="searchDate js-date-range-end" data-type="datepicker-end-nomin">
+                                <input name="End-date" type="text" class="searchDate js-date-range-end" data-type="datepicker-end-nomin" placeholder="End Date">
                                 <a href="#" class="button js-date-range-submit">Go</a>
                             </div>
                        <div class="clearfix"></div>     
                  </div>
+                 <div id="latestNews" class="sectionSubsite news">
+                        <LatestNews:ContentBySearchWebPart 
+                            runat="server" 
+                            AlwaysRenderOnServer="False" 
+                            ResultType="" 
+                            DataProviderJSON="{
+                                            'QueryGroupName':'Default',
+                                            'QueryPropertiesTemplateUrl':'sitesearch://webroot',
+                                            'IgnoreQueryPropertiesTemplateUrl':false,'SourceID':'8413cd39-2156-4e00-b54d-11efd9abdb89',
+                                            'SourceName':'Local SharePoint Results',
+                                            'SourceLevel':'Ssa',
+                                            'CollapseSpecification':'',
+                                            'QueryTemplate':'path:{Site.URL} owstaxIdPageCategory:News Item',
+                                            'FallbackSort':[{'d':1,'p':'RefinableDate00'}],
+                                            'FallbackSortJson':'[{\&quot;p\&quot;:\&quot;RefinableDate00\&quot;,\&quot;d\&quot;:1}]',
+                                            'RankRules':[],
+                                            'RankRulesJson':'[]',
+                                            'AsynchronousResultRetrieval':false,
+                                            'SendContentBeforeQuery':true,
+                                            'BatchClientQuery':true,
+                                            'FallbackLanguage':-1,
+                                            'FallbackRankingModelID':'',
+                                            'EnableStemming':true,
+                                            'EnablePhonetic':false,
+                                            'EnableNicknames':false,
+                                            'EnableInterleaving':false,
+                                            'EnableQueryRules':true,
+                                            'EnableOrderingHitHighlightedProperty':false,
+                                            'HitHighlightedMultivaluePropertyLimit':-1,
+                                            'IgnoreContextualScope':true,
+                                            'ScopeResultsToCurrentSite':false,
+                                            'TrimDuplicates':false,
+                                            'Properties':{&quot;TryCache&quot;:true,
+                                            'Scope':'{Site.URL}',
+                                            'UpdateLinksForCatalogItems':true,
+                                            'EnableStacking':true,
+                                            'ListId':'00000000-0000-0000-0000-000000000000'},
+                                            'PropertiesJson':'{
+                                                            \'TryCache\':true,
+                                                            \'Scope\':\'{Site.URL}\',
+                                                            \'UpdateLinksForCatalogItems\':true,
+                                                            \'EnableStacking\':true,
+                                                            \'ListId\':\'00000000-0000-0000-0000-000000000000\'}',
+                                            'ClientType':'ContentSearchRegular',
+                                            'UpdateAjaxNavigate':true,
+                                            'SummaryLength':180,
+                                            'DesiredSnippetLength':90,
+                                            'PersonalizedQuery':false,
+                                            'FallbackRefinementFilters':null,
+                                            'IgnoreStaleServerQuery':false,
+                                            'RenderTemplateId':'DefaultDataProvider',
+                                            'AlternateErrorMessage':null,
+                                            'Title':''}" 
+                            BypassResultTypes="True" 
+                            ResultsPerPage="3" 
+                            SelectedPropertiesJson="null" 
+                            HitHighlightedPropertiesJson="[&quot;Title&quot;,&quot;Path&quot;,&quot;Author&quot;,&quot;SectionNames&quot;,&quot;SiteDescription&quot;]" 
+                            AvailableSortsJson="null" 
+                            PreloadedItemTemplateIdsJson="null" 
+                            ShowAlertMe="False" 
+                            QueryGroupName="Default" 
+                            StatesJson="{}" 
+                            ServerIncludeScriptsJson="null" 
+                            Title="&lt;%$Resources:Microsoft.Office.Server.Search,CBS_Title;%&gt;" 
+                            FrameType="None" 
+                            SuppressWebPartChrome="False" 
+                            Description="&lt;%$Resources:Microsoft.Office.Server.Search,CBS_Description;%&gt;" 
+                            IsIncluded="True" 
+                            ZoneID="" 
+                            PartOrder="0" 
+                            FrameState="Normal" 
+                            AllowRemove="True" 
+                            AllowZoneChange="True" 
+                            AllowMinimize="True" 
+                            AllowConnect="True" 
+                            AllowEdit="True" 
+                            AllowHide="True" 
+                            IsVisible="True" 
+                            DetailLink=""
+                            GroupTemplateId="~sitecollection/_catalogs/masterpage/Display Templates/Content Web Parts/Group_Content.js"
+                            RenderTemplateId="~sitecollection/_catalogs/masterpage/Display Templates/Content Web Parts/Control_List.js"
+                            ItemTemplateId="~sitecollection/_catalogs/masterpage/Display Templates/Content Web Parts/Item_TwoLines.js" 
+                            HelpLink="" 
+                            HelpMode="Modeless" 
+                            Dir="Default" 
+                            PartImageSmall="" 
+                            MissingAssembly="&lt;%$Resources:core,ImportErrorMessage;%&gt;" 
+                            ImportErrorMessage="&lt;%$Resources:core,ImportErrorMessage;%&gt;" 
+                            PartImageLarge="" 
+                            IsIncludedFilter="" 
+                            ExportControlledProperties="True" 
+                            ConnectionID="00000000-0000-0000-0000-000000000000" 
+                            ID="g_85c300b8_77cb_49d8_a4bb_eb33aa961bd7" 
+                            ChromeType="None" 
+                            ExportMode="All" 
+                            __MarkupType="vsattributemarkup" 
+                            __WebPartId="{85c300b8-77cb-49d8-a4bb-eb33aa961bd7}" 
+                            WebPart="true" 
+                            Height="" 
+                            Width=""/>	
+                    </div>
                  <div>
                 <div data-module="news-archive-filter" class="sectionSubsite news" data-module-started="false">
                     <h3>News Archive</h3>
