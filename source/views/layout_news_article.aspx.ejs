@@ -38,7 +38,7 @@
                             </div>
                        <div class="clearfix"></div>     
                  </div>
-                 <div id="latestNews" class="sectionSubsite news">
+                 <div id="latestNews">
                         <LatestNews:ContentBySearchWebPart 
                             runat="server" 
                             AlwaysRenderOnServer="False" 
