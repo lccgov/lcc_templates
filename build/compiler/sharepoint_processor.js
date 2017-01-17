@@ -151,7 +151,7 @@ class SharePointProcessor extends TemplateProcessor
                                 <div class="row editPanel"> \
                                     <div class="col-md-12"> \
                                         <PublishingWebControls:EditModePanel runat=server id="EditModePanel1"> \
-                                            <Taxonomy:TaxonomyFieldControl FieldName="71aeea80-d174-4461-b2ad-b40d1f6ef43a" runat="server"></Taxonomy:TaxonomyFieldControl> \
+                                            <Taxonomy:TaxonomyFieldControl FieldName="PageCategory" runat="server"></Taxonomy:TaxonomyFieldControl> \
                                         </PublishingWebControls:EditModePanel> \
                                     </div> \
                                 </div> \
