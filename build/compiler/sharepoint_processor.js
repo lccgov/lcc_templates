@@ -19,7 +19,9 @@ class SharePointProcessor extends TemplateProcessor
                           <%@Register TagPrefix="wssucw" TagName="Welcome" Src="~/_controltemplates/15/Welcome.ascx"%> \
                           <%@Register TagPrefix="wssucmui" TagName="MUISelector" Src="~/_controltemplates/15/MUISelector.ascx"%> \
                           <%@Register TagPrefix="PublishingRibbon" TagName="PublishingRibbon" Src="~/_controltemplates/15/Ribbon.ascx"%> \
-                          <%@Register TagPrefix="SearchWC" Namespace="Microsoft.Office.Server.Search.WebControls" Assembly="Microsoft.Office.Server.Search, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%>',
+                          <%@Register TagPrefix="SearchWC" Namespace="Microsoft.Office.Server.Search.WebControls" Assembly="Microsoft.Office.Server.Search, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c"%> \
+                          <%@Register Tagprefix="spsswc"  Namespace="Microsoft.Office.Server.Search.WebControls" Assembly="Microsoft.Office.Server.Search, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> \
+                         <%@Register Tagprefix="CQWPFooter"  Namespace="Microsoft.SharePoint.Publishing.WebControls" Assembly="Microsoft.SharePoint.Publishing, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>',
             html_start_tag: '<SharePoint:SPHtmlTag lang="en" runat="server" id="SPHtmlTag" dir="&lt;%$Resources:wss,multipages_direction_dir_value%&gt;">',
             head_end: '<SharePoint:RobotsMetaTag runat="server"> \
                         </SharePoint:RobotsMetaTag> \
@@ -157,6 +159,17 @@ class SharePointProcessor extends TemplateProcessor
                                 </div> \
                               </div>',
             layout_end_body: '</asp:Content>',
+            layout_reuserblecontent_footer:'<CQWPFooter:ContentByQueryWebPart runat="server" ItemStyle="NoImage" GroupStyle="DefaultHeader" WebUrl="~sitecollection/" ItemXslLink="/Style Library/XSL Style Sheets/RC_ReusableContent.xsl" ListGuid="df58efd9-ef8c-4cad-ae64-8f7123e549cf" ListName="Reusable Content" FilterField1="Title" Filter2ChainingOperator="Or" FilterDisplayValue1="Footer" FilterValue1="Footer" FilterType1="Text" DataMappingViewFields="{fa564e0f-0c70-4ab9-b863-0177e6ddd247},Text;{82dd22bf-433e-4260-b26e-5b8360dd9105},HTML;" GroupByDirection="Desc" SortByDirection="Desc" ItemLimit="1" DataMappings="Description:{82dd22bf-433e-4260-b26e-5b8360dd9105},ReusableHtml,HTML;|ImageUrl:|Title:{fa564e0f-0c70-4ab9-b863-0177e6ddd247},Title,Text;|LinkUrl:|" ServerTemplate="100" UseCopyUtil="True" ShowUntargetedItems="False" EnableOriginalValue="False" ViewFlag="0" ViewContentTypeId="" ListId="00000000-0000-0000-0000-000000000000" PageSize="-1" UseSQLDataSourcePaging="True" DataSourceID="" ShowWithSampleData="False" AsyncRefresh="False" ManualRefresh="False" AutoRefresh="False" AutoRefreshInterval="60" InitialAsyncDataFetch="False" Title="&lt;%$Resources:cmscore,ContentQueryWebPart_Title%&gt;" FrameType="None" SuppressWebPartChrome="False" Description="&lt;%$Resources:cmscore,ContentQueryWebPart_Description%&gt;" IsIncluded="True" ZoneID="ImportedPartZone" PartOrder="0" FrameState="Normal" AllowRemove="True" AllowZoneChange="True" AllowMinimize="True" AllowConnect="True" AllowEdit="True" AllowHide="True" IsVisible="True" DetailLink="" HelpLink="" HelpMode="Modeless" Dir="Default" PartImageSmall="" MissingAssembly="&lt;%$Resources:cmscore,WebPartImportError%&gt;" ImportErrorMessage="&lt;%$Resources:cmscore,WebPartImportError%&gt;" PartImageLarge="" IsIncludedFilter="" ExportControlledProperties="True" ConnectionID="00000000-0000-0000-0000-000000000000" ID="g_64820d85_08aa_41d4_b223_3991f4fa728f" ChromeType="None" ExportMode="All" __MarkupType="vsattributemarkup" __WebPartId="{64820d85-08aa-41d4-b223-3991f4fa728f}" WebPart="true" Height="" Width=""> \
+                <Xsl> \
+                    <xsl:stylesheet version="1.0" exclude-result-prefixes="xsl cmswrt x"> \
+                        <xsl:import href="/Style Library/Footer XSL Style Sheets/Header.xsl" /> \
+                        <xsl:import href="/Style Library/XSL Style Sheets/RC_ReusableContent.xsl" /> \
+                        <xsl:import href="/Style Library/Footer XSL Style Sheets/ContentQueryMain.xsl" /> \
+                    </xsl:stylesheet> \
+                </Xsl> \
+                <SampleData></SampleData> \
+                <DataFields /> \
+                </CQWPFooter:ContentByQueryWebPart>', 
             application_css: util.format('<!-- build:css --><link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/application.css?%s" /><!-- endbuild -->', templateVersion)
         }
 

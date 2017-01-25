@@ -34,7 +34,8 @@ class NunjucksProcessor extends TemplateProcessor
             layout_pageContent:'{% block pageContent %}{% endblock %}',
             layout_editPanel:'{% block editPanel %}{% endblock %}',
             layout_end_body: '{% endblock %}',
-            application_css: '{% block css_register %}{% endblock %}'
+            application_css: '{% block css_register %}{% endblock %}',
+            layout_reuserblecontent_footer:'{% block reuserblecontent_footer %}{% endblock %}',
         }
 
         return hash;
