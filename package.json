@@ -1,6 +1,6 @@
 {
   "name": "lcc_templates",
-  "version": "1.1.31",
+  "version": "1.1.32",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "child-process": "^1.0.2",
     "ejs": "^2.5.2",
     "glob": "^7.0.6",
-    "lcc_frontend_toolkit": "^0.62.0",
+    "lcc_frontend_toolkit": "^0.67.0",
     "lodash": "^4.15.0",
     "mincer": "^1.4.2",
     "mkpath": "^1.0.0",
