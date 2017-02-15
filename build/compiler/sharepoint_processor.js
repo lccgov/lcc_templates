@@ -170,6 +170,8 @@ class SharePointProcessor extends TemplateProcessor
                 <SampleData></SampleData> \
                 <DataFields /> \
                 </CQWPFooter:ContentByQueryWebPart>', 
+            layout_additional_page_scripts:'<asp:ContentPlaceHolder id="AdditionalPageScripts" runat="server"></asp:ContentPlaceHolder>',
+
             application_css: util.format('<!-- build:css --><link rel="stylesheet" href="/_catalogs/masterpage/public/stylesheets/application.css?%s" /><!-- endbuild -->', templateVersion)
         }
 
