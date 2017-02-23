@@ -146,7 +146,16 @@ class SharePointProcessor extends TemplateProcessor
                                     <SharePointWebControls:ProjectProperty Property="Description" runat="server"/> \
                                 </asp:Content> \
                                 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">',
-            layout_breadcrumb:'<ASP:SITEMAPPATH runat="server" ParentLevelsDisplayed="1" sitemapproviders="SPSiteMapProvider,SPXmlContentMapProvider" rendercurrentnodeaslink="false" hideinteriorrootnodes="true" RootNodeStyle-CssClass="home" NodeStyle-CssClass="bc-node"><PATHSEPARATORTEMPLATE></PATHSEPARATORTEMPLATE></ASP:SITEMAPPATH> ',
+            layout_breadcrumb:' <SharePointWebControls:ListSiteMapPath runat="server" \
+                                SiteMapProviders="GlobalNavigationTaxonomyProvider" \
+                                RenderCurrentNodeAsLink="false" \
+                                NodeStyle-CssClass=""\
+                                CurrentNodeStyle-CssClass=""\
+                                RootNodeStyle-CssClass=""\
+                                HideInteriorRootNodes="true"\
+                                SkipLinkText=""\
+                                PathSeparator="">\
+                                </SharePointWebControls:ListSiteMapPath>',
             layout_header:'<SharePointWebControls:TextField FieldName="fa564e0f-0c70-4ab9-b863-0177e6ddd247" runat="server" />',
             layout_pageContent:'<PublishingWebControls:RichHtmlField FieldName="f55c4d88-1f2e-4ad9-aaa8-819af4ee7ee8" runat="server"></PublishingWebControls:RichHtmlField>',
             layout_editPanel:'<div class="container-fluid"> \
