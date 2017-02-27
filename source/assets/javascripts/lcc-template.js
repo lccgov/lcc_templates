@@ -6,7 +6,6 @@
 //= require accessible-media-player
 //= require sticky-ribbon
 //= require jquery-ui-datepicker
-//= require google-analytics
 //= require modules/back-to-top
 //= require modules/accordion
 //= require modules/carousel
