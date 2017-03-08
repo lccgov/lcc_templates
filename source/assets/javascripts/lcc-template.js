@@ -7,6 +7,7 @@
 //= require sticky-ribbon
 //= require jquery-ui-datepicker
 //= require max-characters
+//= require datepicker
 //= require modules/back-to-top
 //= require modules/accordion
 //= require modules/carousel
