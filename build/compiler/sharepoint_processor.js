@@ -147,7 +147,7 @@ class SharePointProcessor extends TemplateProcessor
                                 </asp:Content> \
                                 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">',
             layout_breadcrumb:' <SharePointWebControls:ListSiteMapPath runat="server" \
-                                SiteMapProviders="GlobalNavigationTaxonomyProvider" \
+                                SiteMapProviders="CurrentNavigationSwitchableProvider" \
                                 RenderCurrentNodeAsLink="false" \
                                 NodeStyle-CssClass=""\
                                 CurrentNodeStyle-CssClass=""\
