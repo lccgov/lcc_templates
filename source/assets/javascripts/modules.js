@@ -28,8 +28,9 @@ $(document).ready(function () {
       return modules;
     },
 
-    start: function (container) {
+    start: function (container, force) {
       var modules = this.find(container);
+      force = force || false;
 
       for (var i = 0, l = modules.length; i < l; i++) {
         var module,
@@ -37,7 +38,7 @@ $(document).ready(function () {
           type = camelCaseAndCapitalise(element.data('module')),
           started = element.data('module-started');
 
-        if (typeof LCC.Modules[type] === "function" && !started) {
+        if (typeof LCC.Modules[type] === "function" && (!started || force )) {
           module = new LCC.Modules[type]();
           module.start(element);
           element.data('module-started', true);
