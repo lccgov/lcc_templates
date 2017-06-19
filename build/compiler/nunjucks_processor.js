@@ -23,7 +23,6 @@ class NunjucksProcessor extends TemplateProcessor
             search_box: '{% include "includes/search_global.html" %}',
             main_nav: '{% block main_nav %}{% endblock %}',
             body_content: '{% block body_content %}{% endblock %}',
-            footer_nav: '{% block footer_nav %}{% endblock %}',
             body_end: '',
             html_end_tag: '</html>',
             asset_path: this.asset_path,
