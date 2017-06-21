@@ -33,6 +33,11 @@
         </head>
     <body <%- body_attribute %>>
     <%- body_start %>
+        <div id="skiplink-container">
+            <div>
+                <a href="#main" class="skip">Skip to main content</a>
+            </div>
+        </div>
         <div id="s4-workspace-disabled" class="mainWorkspace">
             <div id="s4-bodyContainer">
                 <!-- COOKIES -->
@@ -109,6 +114,21 @@
                     <!-- /.main-menu -->
                 </div>
                 <!-- /.header-nav-container -->
+                
+                <!--[if (lt IE 9) & (!IEMobile)]>
+                    <![if (IE 8)]>
+                        <div class="browser-alert"><div class="container-fluid"><div class="row"><div class="col-lg-12"><span>This site is optimised for modern web browsers, and does not fully support your version of Internet Explorer</span></div></div></div></div>
+                    <![endif]>
+
+                    <![if (IE 7)]>
+                        <div class="browser-alert"><div class="container-fluid"><div class="row"><div class="col-lg-12"><span>This site is optimised for modern web browsers, and does not fully support your version of Internet Explorer</span></div></div></div></div>
+                    <![endif]>
+
+                    <![if (IE 6)]>
+                        <div class="browser-alert"><div class="container-fluid"><div class="row"><div class="col-lg-12"><span>This site is optimised for modern web browsers, and does not fully support your version of Internet Explorer</span></div></div></div></div>
+                    <![endif]>
+                <![endif]-->
+
                   <!-- ALERTS -->
                 <div id="alert">
                 <%- layout_alerts %>
