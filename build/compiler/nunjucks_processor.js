@@ -30,6 +30,7 @@ class NunjucksProcessor extends TemplateProcessor
             layout_begin_body:'{% extends "lcc-template.html" %}{% block body_content %}',
             layout_breadcrumb:'{% block breadcrumb %}{% endblock %}',
             layout_header:'{% block header %}{% endblock %}',
+            layout_pageOverview:'{% block pageOverview %}{% endblock %}',
             layout_pageContent:'{% block pageContent %}{% endblock %}',
             layout_editPanel:'{% block editPanel %}{% endblock %}',
             layout_end_body: '{% endblock %}',

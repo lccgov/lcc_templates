@@ -153,6 +153,7 @@ class SharePointProcessor extends TemplateProcessor
                                 PathSeparator="">\
                                 </SharePointWebControls:ListSiteMapPath>',
             layout_header:'<SharePointWebControls:TextField FieldName="fa564e0f-0c70-4ab9-b863-0177e6ddd247" runat="server" />',
+            layout_pageOverview:'<PublishingWebControls:RichHtmlField FieldName="86091a6f-b67f-4a54-9cac-29ad01dd127d" runat="server"></PublishingWebControls:RichHtmlField>',
             layout_pageContent:'<PublishingWebControls:RichHtmlField FieldName="f55c4d88-1f2e-4ad9-aaa8-819af4ee7ee8" runat="server"></PublishingWebControls:RichHtmlField>',
             layout_editPanel:'<div class="container-fluid"> \
                                 <div class="row editPanel"> \
