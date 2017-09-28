@@ -24,7 +24,7 @@
         }); 
         $("input[data-type='datepicker-start-nomin']").datepicker({
             defaultDate: null,
-            dateFormat: "yy/mm/dd",
+            dateFormat: "dd/mm/yy",
             changeMonth: true,
             onSelect: function(selected) {
                 $("input[data-type='datepicker-end-nomin']").datepicker("option", "minDate", selected)
@@ -32,7 +32,7 @@
         });
         $("input[data-type='datepicker-end-nomin']").datepicker({
             defaultDate: null,
-            dateFormat: "yy/mm/dd",
+            dateFormat: "dd/mm/yy",
             changeMonth: true,
             onSelect: function (selected) {
                 $("input[data-type='datepicker-start-nomin']").datepicker("option", "maxDate", selected)
