@@ -1,0 +1,67 @@
+<%- layout_begin_body %>
+<%- placeholder("sectionOneTop") %>
+<section id="main" class="sectionOne" role="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <%- placeholder("sectionOneFull") %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb">
+                    <%- layout_breadcrumb %> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h1>[Page category]</h1> 
+                <aside class="part-navigation__container" role="complementary">
+                    <nav role="navigation" class="part-navigation" aria-label="Pages in this guide">
+                        <ol>
+                            <li>[Page 1 name - static]</li>
+                            <li><a href="#">[Page 2 name - link]</a></li>
+                            <li><a href="#">[Page 3 name - link]</a></li>
+                            <li><a href="#">[Page 4 name - link]</a></li>
+                        </ol>
+                    </nav>
+                </aside>
+                <div class="part-content">
+                    <h1><%- layout_header %></h1> 
+                    <%- placeholder("sectionOneContent") %>
+                </div>
+                <nav class="pagination-nav" role="navigation" aria-label="Pagination">
+                    <ul>
+                        <li class="pagination-nav__previous-page">
+                            <a href="#" rel="prev">
+                            <span class="pagination-nav__part-title">Previous</span>
+                            <span class="pagination-nav__label">[PAGE NAME]</span>
+                            </a>
+                        </li>
+                        <li class="pagination-nav__next-page">
+                            <a href="#" rel="next">
+                            <span class="pagination-nav__part-title">Next</span>
+                            <span class="pagination-nav__label">[PAGE NAME]</span>
+                            </a>
+                        </li>
+                        <div style="clear:both"></div>
+                    </ul>
+                </nav>
+    
+            </div>
+            <aside role="complementary" class="col-md-4">
+                <%- placeholder("sectionOneRightHandColumn") %>
+            </aside>
+        </div> 
+        <div class="row">
+            <div class="col-lg-12">
+                <%- placeholder("sectionOneFullBottom") %>
+            </div>
+        </div>
+    </div>
+</section>
+<section>      
+    <%- layout_editPanel %>
+</section>
+<%- layout_end_body %>
