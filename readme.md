@@ -1,6 +1,6 @@
 # lcc templates
 
-A collection of templates to be used by Leeds City Council applications. 
+A collection of templates to be used by Leeds City Council applications.. 
 
 The compilation and packaging model is based on [govuk_template](https://github.com/alphagov/govuk_template), but ported to Node.js rather than using Ruby.
 
