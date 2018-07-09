@@ -63,7 +63,9 @@
                                                 <div class="input-group">
                                                     <!--sharepoint search-->
                                                     <div data-name="search_box">
-                                                          <%- search_box %>                                          
+                                                        <!-- build:searchBox -->
+                                                          <%- search_box %>   
+                                                        <!-- endbuild -->                                       
                                                     </div>
                                                     <!-- end sharepoint search -->
                                                 </div>
@@ -105,7 +107,9 @@
                         <div class="container-fluid">
                             <!-- sharepoint nav -->
                             <div data-name="main_nav">
-                            <%- main_nav %>
+                            <!-- build:mainNav -->
+                                <%- main_nav %>
+                            <!-- endbuild -->
                             </div>
                             <!--/.sharepoint nav -->
                         </div>
