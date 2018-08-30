@@ -51,7 +51,7 @@
                                             'SourceName':'Local SharePoint Results',
                                             'SourceLevel':'Ssa',
                                             'CollapseSpecification':'',
-                                            'QueryTemplate':'path:{Site.URL} owstaxIdPageCategory:News Item',
+                                            'QueryTemplate':'path:{Site.URL} owstaxIdPageCategory:\&quot;News Item\&quot;',
                                             'FallbackSort':[{'d':1,'p':'RefinableDate00'}],
                                             'FallbackSortJson':'[{\&quot;p\&quot;:\&quot;RefinableDate00\&quot;,\&quot;d\&quot;:1}]',
                                             'RankRules':[],
