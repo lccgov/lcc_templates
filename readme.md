@@ -12,7 +12,7 @@ The build process, using [Jake](http://jakejs.com) processes each of the templat
 
 This process could be extended to any markup language, such as [Razor](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor) by creating a new processor in the build/compiler directory of the repo and a new publisher in the build/publisher directory. 
 
-We also include JavaScript that is fundamental for the working of all our templates/sites. We have a selection of modules located in source/assets/javascripts/modules directory that allow designers/content editors to add interaction by simply adding data attributes to HTML elements, such as data-module='carousel' for example. If you think that the piece of functionality that you are developing would be beneficial to many LCC applications, then it would be worthwhile including it in this repo.
+We also include JavaScript that is fundamental for the working of all our templates/sites. We have a selection of modules located in source/assets/javascripts/modules directory that allow designers/content editors to add interaction by simply adding data attributes to HTML elements, such as data-module='carousel' for example. If you think that the piece of functionality that you are developing would be beneficial to many LCC applications, then it would be worthwhile including it in this repo..
 
 The benefit of using this approach for creating our templates is that we are not tied into a specific vendor/technology, so if we do need to swap our CMS in the future it should be trivial to re-apply our LCC branding.
 
