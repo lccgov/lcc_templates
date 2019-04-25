@@ -39,7 +39,7 @@ class NunjucksProcessor extends TemplateProcessor
             layout_additional_page_scripts:'{% block additional_page_scripts %}{% endblock %}',
             logo: '<a href="pages/default.aspx" class="logo img-responsive"><span></span></a>',
             layout_alerts:'{% block layout_alerts %}{% endblock %}',
-            cdn_top:'    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" /><script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script><script sr="//cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>',
+            cdn_top:'    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" /><script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>',
             cdn_bottom:'<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js" type="text/javascript"></script><script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.0/jquery-migrate.min.js" type="text/javascript"></script><script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script><script src="//static.atgsvcs.com/js/atgsvcs.js" type="text/javascript"></script>  '  
         }
 
