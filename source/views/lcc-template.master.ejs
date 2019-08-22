@@ -7,11 +7,18 @@
 <!--[if IE 9 ]>    <html lang="en" class="ie9">    <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <%- html_start_tag %><!--<![endif]-->
+
     <head <%- head_attribute %>>
+
+        <!-- Meta data -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="author" content="" />  
+        <meta name="GENERATOR" content="Microsoft SharePoint" />
+        <meta http-equiv="Expires" content="0" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+        <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="<%- asset_path("apple-touch-icon.png") %>">
         <link rel="icon" type="image/png" href="<%- asset_path("favicon-32x32.png") %>" sizes="32x32">
         <link rel="icon" type="image/png" href="<%- asset_path("favicon-16x16.png") %>" sizes="16x16">
@@ -19,26 +26,36 @@
         <link rel="manifest" href="<%- asset_path("manifest.json") %>">
         <link rel="mask-icon" href="<%- asset_path("safari-pinned-tab.svg") %>" color="#5bbad5">
         <meta name="theme-color" content="#ffffff">
+
         <!-- Bootstrap CSS -->
         <%- cdn_top %>
-        <meta name="GENERATOR" content="Microsoft SharePoint" />
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta http-equiv="Expires" content="0" />
+        
+        <!-- SharePoint scripts -->
         <%- head_end %>
+
         <!-- Template CSS -->
         <%- asset_path("lcc-template.css") %>
+
         <!-- Application CSS -->
         <%- application_css %>
-        </head>
+
+    </head>
+
     <body <%- body_attribute %>>
     <%- body_start %>
+
+        <%- SPWebPartManager %>
+
         <div id="skiplink-container">
             <div>
                 <a href="#main" class="skip">Skip to main content</a>
             </div>
         </div>
+
         <div id="s4-workspace-disabled" class="mainWorkspace">
+
             <div id="s4-bodyContainer">
+
                 <!-- COOKIES -->
 				<div id="containerSiteStatement">
                     <div id="siteStatement">
@@ -47,7 +64,8 @@
                             <a class="submit js-seen-cookie-message" href="">Don't show this message again</a>
                         </div>
                     </div>
-            </div> 
+                </div> 
+                
                 <!--masterhead section -->
                 <section class="masterhead">
                     <div class="container-fluid">
@@ -135,7 +153,7 @@
 
                   <!-- ALERTS -->
                 <div id="alert">
-                <%- layout_alerts %>
+                    <%- layout_alerts %>
                 </div>
                  <!-- /ALERTS -->
 

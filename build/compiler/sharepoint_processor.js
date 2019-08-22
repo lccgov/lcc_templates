@@ -59,14 +59,14 @@ class SharePointProcessor extends TemplateProcessor
                         <SharePoint:SoapDiscoveryLink runat="server"> \
                         </SharePoint:SoapDiscoveryLink> \
                         <SharePoint:AjaxDelta id="DeltaPlaceHolderAdditionalPageHead" Container="false" runat="server"> \
-                        <asp:ContentPlaceHolder id="PlaceHolderAdditionalPageHead" runat="server"> \
-                        </asp:ContentPlaceHolder> \
-                        <SharePoint:DelegateControl runat="server" ControlId="AdditionalPageHead" AllowMultipleControls="true"> \
-                        </SharePoint:DelegateControl> \
-                        <asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server"> \
-                        </asp:ContentPlaceHolder> \
-                        </SharePoint:AjaxDelta> \
-                        <SharePoint:AjaxDelta id="DeltaSPWebPartManager" runat="server"> \
+                            <asp:ContentPlaceHolder id="PlaceHolderAdditionalPageHead" runat="server"> \
+                            </asp:ContentPlaceHolder> \
+                            <SharePoint:DelegateControl runat="server" ControlId="AdditionalPageHead" AllowMultipleControls="true"> \
+                            </SharePoint:DelegateControl> \
+                            <asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server"> \
+                            </asp:ContentPlaceHolder> \
+                        </SharePoint:AjaxDelta>',
+            SPWebPartManager:'<SharePoint:AjaxDelta id="DeltaSPWebPartManager" runat="server"> \
                             <WebPartPages:SPWebPartManager runat="server"> \
                             </WebPartPages:SPWebPartManager> \
                         </SharePoint:AjaxDelta>',
