@@ -66,13 +66,13 @@ class SharePointProcessor extends TemplateProcessor
                             <asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat="server"> \
                             </asp:ContentPlaceHolder> \
                         </SharePoint:AjaxDelta>',
-            SPWebPartManager:'<SharePoint:AjaxDelta id="DeltaSPWebPartManager" runat="server"> \
-                            <WebPartPages:SPWebPartManager runat="server"> \
-                            </WebPartPages:SPWebPartManager> \
-                        </SharePoint:AjaxDelta>',
             head_attribute: 'runat="server"',
             body_attribute: 'onhashchange="if (typeof(_spBodyOnHashChange) != \'undefined\') _spBodyOnHashChange();"',
-            body_start: '<SharePoint:SPClientIDGenerator runat="server" ServerControlID="DeltaPlaceHolderMain;DeltaPlaceHolderPageTitleInTitleArea;DeltaPlaceHolderUtilityContent" /><SharePoint:ImageLink runat="server" /> \
+            body_start: '<SharePoint:AjaxDelta id="DeltaSPWebPartManager" runat="server"> \
+                            <WebPartPages:SPWebPartManager runat="server"> \
+                            </WebPartPages:SPWebPartManager> \
+                        </SharePoint:AjaxDelta> \
+                        <SharePoint:SPClientIDGenerator runat="server" ServerControlID="DeltaPlaceHolderMain;DeltaPlaceHolderPageTitleInTitleArea;DeltaPlaceHolderUtilityContent" /><SharePoint:ImageLink runat="server" /> \
                             <SharePoint:SharePointForm onsubmit="if (typeof (_spFormOnSubmitWrapper) != \'undefined\') {return _spFormOnSubmitWrapper();} else {return true;}" runat="server"><asp:ScriptManager id="ScriptManager" runat="server" EnablePageMethods="false" \ EnablePartialRendering="true" EnableScriptGlobalization="false" EnableScriptLocalization="true" /> \
                             <SharePoint:SPSecurityTrimmedControl runat="server" HideFromSearchCrawler="true" EmitDiv="true"> \
                                 <div id="TurnOnAccessibility" style="display:none" class="s4-notdlg noindex"> \
