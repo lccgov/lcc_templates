@@ -3,7 +3,7 @@ node_js: "6"
 before_install:
 install:
 - npm install -g npm
-- npm install -g jake
+- npm install -g jake@8.1.1
 - npm install
 script:
 - jake --jakefile ./jakefile.js --trace
