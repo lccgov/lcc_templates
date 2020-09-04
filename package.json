@@ -17,7 +17,7 @@
     "lodash": "^4.15.0",
     "mincer": "^1.4.2",
     "mkpath": "^1.0.0",
-    "node-sass": "^3.10.0",
+    "node-sass": "^4.14.1",
     "path-exists": "^3.0.0",
     "rmdir": "^1.2.0",
     "root-require": "^0.3.1",
